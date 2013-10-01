@@ -21,7 +21,8 @@ document.getElementById("submit").onclick = function() {
 			console.log("f.TURNOVER failed.");
 		}
 		if (f.VALUE_SAVING_IN_MINUTES_OF_ONE_CURRENCY() == true) {
-			var temp = v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY + "";
+			
+			var temp = toFixed(v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY) + "";
 			for (var i = 0; i < temp.length; i++) {
 				if (temp[i] != "0" && temp[i] != ".") {
 					temp = temp.substring(0, i + 2);
@@ -39,6 +40,24 @@ document.getElementById("submit").onclick = function() {
 			console.log("f.NUMBER_OF_UPSELLS");
 		}
 	}
+}
+
+function toFixed(x) {
+  if (Math.abs(x) < 1.0) {
+    var e = parseInt(x.toString().split('e-')[1]);
+    if (e) {
+        x *= Math.pow(10,e-1);
+        x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+    }
+  } else {
+    var e = parseInt(x.toString().split('+')[1]);
+    if (e > 20) {
+        e -= 20;
+        x /= Math.pow(10,e);
+        x += (new Array(e+1)).join('0');
+    }
+  }
+  return x;
 }
 
 

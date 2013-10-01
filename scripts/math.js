@@ -38,7 +38,7 @@ var v = {
 	//-------------------------------
 	TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES : null,
 	ASSUMED_TIME_FOR_UPSELL : 2,
-	NUMBER_OF_UPSELLS : null,
+	NUMBER_OF_UPSELLS : null
 }
 var c = {//currency exchange rates from pounds. Accurate as of 30/9/13 at 10:30am from XE.com
 	toUSDfromPOUNDS : 0.619,
@@ -70,10 +70,10 @@ var f = {
 		try {
 			if (v.CURRENCY != "GBP") {
 				if (v.CURRENCY == "EUR") {
-					v.AVERAGE_ROOM_RATE = c.fromEUR(v.AVERAGE_ROOM_RATE);
+				//	v.AVERAGE_ROOM_RATE = c.fromEUR(v.AVERAGE_ROOM_RATE);
 				}
 				if (v.CURRENCY == "USD") {
-					v.AVERAGE_ROOM_RATE = c.fromUSD(v.AVERAGE_ROOM_RATE);
+				//	v.AVERAGE_ROOM_RATE = c.fromUSD(v.AVERAGE_ROOM_RATE);
 				}
 			}
 			//alert(v.AVERAGE_ROOM_RATE);
@@ -103,11 +103,11 @@ var f = {
 			var temp = v.COST_OF_MANPOWER;
 			if (v.CURRENCY != "GBP") {
 				if (v.CURRENCY == "EUR") {
-					v.TOTAL_BENEFIT_PA = c.fromEUR(v.TOTAL_BENEFIT_PA);
+					//v.TOTAL_BENEFIT_PA = c.fromEUR(v.TOTAL_BENEFIT_PA);
 					temp = c.fromEUR(v.COST_OF_MANPOWER);
 				}
 				if (v.CURRENCY == "USD") {
-					v.TOTAL_BENEFIT_PA = c.fromUSD(v.TOTAL_BENEFIT_PA);
+					//v.TOTAL_BENEFIT_PA = c.fromUSD(v.TOTAL_BENEFIT_PA);
 					temp = c.fromUSD(v.COST_OF_MANPOWER);
 				}
 			}
