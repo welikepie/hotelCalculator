@@ -26,6 +26,7 @@
 				cursor: pointer;
 			}
 			.Error {
+				display:none;
 				background-color: pink;
 				float: left;
 				clear: left;
@@ -33,63 +34,63 @@
 		</style>
 	</head>
 	<body>
-		<h4>Let's Calculate some shit, yo.</h4>
-
-		<label>Company Name
-			<input type="text" id="JS-companyInput">
-		</label>
-		<div class = "Error" id="JS-companyInput">
-			<strong>Something's Wrong!</strong>This doesn't look like a company name.
+		<div id="calculator">
+			<h4>Let's Calculate some shit, yo.</h4>
+			<label>Company Name
+				<input type="text" id="JS-companyInput">
+			</label>
+			<div class = "Error" id="JS-companyInputError">
+				<strong>Something's Wrong!</strong> This doesn't look like a company name.
+			</div>
+			<label>Number of Rooms * :
+				<input type="text" id="JS-number-of-rooms">
+			</label>
+			<div class = "Error" id="JS-number-of-roomsError">
+				<strong>Something's Wrong!</strong> This doesn't look like a number of rooms.
+			</div>
+			<label>Currency * :
+				<select id="JS-currency">
+					<option value="GBP">GBP</option>
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+				</select></label>
+			<div class = "Error" id="JS-currencyError">
+				<strong>Something's Wrong!</strong> This doesn't look like a currency we recognise.
+			</div>
+			<label>Average Room Rate (Per Night) * :
+				<input type="text" id="JS-average-room-rate">
+			</label>
+			<div class = "Error" id="JS-average-room-rateError">
+				<strong>Something's Wrong!</strong> This doesn't look like a room rate.
+			</div>
+			<label>Contact Name :
+				<input type="text" id="JS-contactInput">
+			</label>
+			<div class = "Error" id="JS-contactInputError">
+				<strong>Something's Wrong!</strong> This doesn't look like a contact name.
+			</div>
+			<label>Email Address :
+				<input type="text" id="JS-emailInput">
+			</label>
+	
+			<div class = "Error" id="JS-emailInputError">
+				<strong>Something's Wrong!</strong> This doesn't look like an email address.
+			</div>
+			<label>Contact Phone Number :
+				<input type="text" id="JS-phoneInput">
+			</label>
+			<div class = "Error" id="JS-phoneInputError">
+				<strong>Something's Wrong!</strong> This doesn't look like a phone number.
+			</div>
+			<div class="button" id="submit">
+				Submit
+			</div>
+			<label>Number of Transactions : <div id="JS-numTransactionOutput"></div></label>
+			<label>Average Transaction Value : <div id="JS-ATVOutput"></div></label>
+			<label>Estimated Turnover : <div id="JS-TurnoverOutput"></div></label>
+			<label>Value per Minute : <div id="JS-valueOutput"></div></label>
+			<label>Number of Potential Upsells : <div id="JS-upsellOutput"></div></label>
 		</div>
-		<label>Number of Rooms * :
-			<input type="text" id="JS-number-of-rooms">
-		</label>
-		<div class = "Error" id="JS-number-of-rooms">
-			<strong>Something's Wrong!</strong>This doesn't look like a number of rooms.
-		</div>
-		<label>Currency * :
-			<select id="JS-currency">
-				<option value="GBP">GBP</option>
-				<option value="USD">USD</option>
-				<option value="EUR">EUR</option>
-			</select></label>
-		<div class = "Error" id="JS-currencyError">
-			<strong>Something's Wrong!</strong> This doesn't look like a currency we recognise.
-		</div>
-		<label>Average Room Rate (Per Night) * :
-			<input type="text" id="JS-average-room-rate">
-		</label>
-		<div class = "Error" id="JS-average-room-rateError">
-			<strong>Something's Wrong!</strong> This doesn't look like a room rate.
-		</div>
-		<label>Contact Name :
-			<input type="text" id="JS-contactInput">
-		</label>
-		<div class = "Error" id="JS-contactInputError">
-			<strong>Something's Wrong!</strong> This doesn't look like a contact name.
-		</div>
-		<label>Email Address :
-			<input type="text" id="JS-emailInput">
-		</label>
-
-		<div class = "Error" id="JS-emailInputError">
-			<strong>Something's Wrong!</strong> This doesn't look like an email address.
-		</div>
-		<label>Contact Phone Number :
-			<input type="text" id="JS-phoneInput">
-		</label>
-		<div class = "Error" id="JS-phoneInputError">
-			<strong>Something's Wrong!</strong> This doesn't look like a phone number.
-		</div>
-		<div class="button" id="submit">
-			Submit
-		</div>
-		<label>Number of Transactions : <div id="JS-numTransactionOutput"></div></label>
-		<label>Average Transaction Value : <div id="JS-ATVOutput"></div></label>
-		<label>Estimated Turnover : <div id="JS-TurnoverOutput"></div></label>
-		<label>Value per Minute : <div id="JS-valueOutput"></div></label>
-		<label>Number of Potential Upsells : <div id="JS-upsellOutput"></div></label>
-
 	</body>
 	<footer>
 		<script type="text/javascript" src="scripts/util.js"></script>

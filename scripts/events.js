@@ -2,7 +2,6 @@
 document.getElementById("submit").onclick = function() {
 	if (util.errorChecking() == true) {
 		v.NUMBER_OF_ROOMS = document.getElementById("JS-number-of-rooms").value * 1;
-		alert(document.getElementById("JS-currency").value);
 		v.CURRENCY = document.getElementById("JS-currency").value;
 		v.AVERAGE_ROOM_RATE = document.getElementById("JS-average-room-rate").value * 1;
 		if (f.NUMBER_OF_TRANSACTIONS_PER_DAY() == true) {
@@ -41,4 +40,5 @@ document.getElementById("submit").onclick = function() {
 		}
 	}
 }
+
 

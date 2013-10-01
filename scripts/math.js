@@ -37,7 +37,7 @@ var v = {
 	VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY : null,
 	//-------------------------------
 	TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES : null,
-	ASSUMED_TIME_FOR_UPSELL : 5,
+	ASSUMED_TIME_FOR_UPSELL : 2,
 	NUMBER_OF_UPSELLS : null,
 }
 var c = {//currency exchange rates from pounds. Accurate as of 30/9/13 at 10:30am from XE.com
@@ -50,7 +50,6 @@ var c = {//currency exchange rates from pounds. Accurate as of 30/9/13 at 10:30a
 		return input / c.toEURfromPOUNDS;
 	},
 	fromUSD : function(input) {
-		console.log(input * c.toUSDfromPOUNDS);
 		return input * c.toUSDfromPOUNDS;
 	},
 	fromEUR : function(input) {
@@ -77,7 +76,7 @@ var f = {
 					v.AVERAGE_ROOM_RATE = c.fromUSD(v.AVERAGE_ROOM_RATE);
 				}
 			}
-			alert(v.AVERAGE_ROOM_RATE);
+			//alert(v.AVERAGE_ROOM_RATE);
 			v.AVERAGE_TRANSACTION_VALUE = (v.AVERAGE_ROOM_RATE * v.AVERAGE_STAY) * v.EXTRAS;
 				return true;
 
@@ -96,27 +95,25 @@ var f = {
 			return false;
 		}
 		return true;
-
 	},
 	VALUE_SAVING_IN_MINUTES_OF_ONE_CURRENCY : function() {
 		try {
 			v.TOTAL_BENEFIT_PA = v.TURNOVER * v.VISA_AND_MASTERCARD_TRANSACTIONS * v.FOREIGN_CARD * v.DCC_ACCEPTANCE * v.COST_BENEFIT;
 			//alert(v.TOTAL_BENEFIT_PA);
+			var temp = v.COST_OF_MANPOWER;
 			if (v.CURRENCY != "GBP") {
 				if (v.CURRENCY == "EUR") {
 					v.TOTAL_BENEFIT_PA = c.fromEUR(v.TOTAL_BENEFIT_PA);
+					temp = c.fromEUR(v.COST_OF_MANPOWER);
 				}
 				if (v.CURRENCY == "USD") {
 					v.TOTAL_BENEFIT_PA = c.fromUSD(v.TOTAL_BENEFIT_PA);
+					temp = c.fromUSD(v.COST_OF_MANPOWER);
 				}
 			}
-//			alert(v.NUMBER_OF_TRANSACTIONS_PER_DAY+","+ v.TIME_SAVING_MINUTES+","+ v.WORKING_MINUTES_IN_YEAR);
 			v.YEARLY_TIME_SAVING_YEARS = (v.NUMBER_OF_TRANSACTIONS_PER_DAY * v.TIME_SAVING_MINUTES) / v.WORKING_MINUTES_IN_YEAR;
-	//		alert(v.YEARLY_TIME_SAVING_YEARS);
-			v.VALUE_SAVING_IN_CURRENCY = v.COST_OF_MANPOWER * v.YEARLY_TIME_SAVING_YEARS;
-		//	alert(v.VALUE_SAVING_IN_CURRENCY);
+			v.VALUE_SAVING_IN_CURRENCY = temp * v.YEARLY_TIME_SAVING_YEARS;
 			v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY = v.VALUE_SAVING_IN_CURRENCY / v.WEEKS_IN_YEAR / v.HOURS_IN_WEEK / v.MINUTES_IN_HOUR;
-			//alert(v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY);
 		return true;
 
 		} catch(e) {
@@ -127,12 +124,8 @@ var f = {
 	NUMBER_OF_UPSELLS : function() {
 		try {
 			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TOTAL_BENEFIT_PA / v.VALUE_SAVING_IN_CURRENCY;
-			//dividing yourself by something?wat?
-			alert(v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES);
-			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY;
-			alert(v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES);
 			v.NUMBER_OF_UPSELLS = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.ASSUMED_TIME_FOR_UPSELL;
-			alert(v.ASSUMED_TIME_FOR_UPSELL);
+			//alert(v.ASSUMED_TIME_FOR_UPSELL);
 			return true;
 		} catch(e) {
 			console.log(e.stack);
