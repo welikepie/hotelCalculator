@@ -2,7 +2,7 @@
 //v is variable object.
 //f is function object.
 //c is the currency object.
-use"strict";
+"use strict";
 var v = {
 	CURRENCY : "GBP",
 	//---------------------------
@@ -24,7 +24,7 @@ var v = {
 	COST_BENEFIT : 0.013, //This is the coefficient we apply to the value in GBP of the transactions that were accepted in DCC to calculate the amount we reimburse to the hotel.
 	TOTAL_BENEFIT_PA : null,
 
-	TIME_SAVING_MINUTES : null,
+	TIME_SAVING_MINUTES : 0.5,
 	WORKING_MINUTES_IN_YEAR : 115200,
 	YEARLY_TIME_SAVING_YEARS : null, //in years, apparently. Who'd've thunk.
 
@@ -37,55 +37,60 @@ var v = {
 	VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY : null,
 	//-------------------------------
 	TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES : null,
-	ASSUMED_TIME_FOR_UPSELL : null,
+	ASSUMED_TIME_FOR_UPSELL : 5,
 	NUMBER_OF_UPSELLS : null,
 }
 var c = {//currency exchange rates from pounds. Accurate as of 30/9/13 at 10:30am from XE.com
 	toUSDfromPOUNDS : 0.619,
 	toEURfromPOUNDS : 0.834,
 	toUSD : function(input) {
-		return input / toUSDfromPOUNDS;
+		return input / c.toUSDfromPOUNDS;
 	},
 	toEUR : function(input) {
-		return input / toEURfromPOUNDS;
+		return input / c.toEURfromPOUNDS;
 	},
 	fromUSD : function(input) {
-		return input * toUSDfromPOUNDS;
+		console.log(input * c.toUSDfromPOUNDS);
+		return input * c.toUSDfromPOUNDS;
 	},
 	fromEUR : function(input) {
-		return input * toEURfromPOUNDS;
+		return input * c.toEURfromPOUNDS;
 	}
 }
 var f = {
 	NUMBER_OF_TRANSACTIONS_PER_DAY : function() {
 		try {
 			v.NUMBER_OF_TRANSACTIONS_PER_DAY = (v.NUMBER_OF_ROOMS * v.OCCUPANCY) / v.AVERAGE_STAY;
+			return true;
 		} catch(e) {
 			console.log(e);
 			return false;
 		}
-		return true;
 	},
 	AVERAGE_TRANSACTION_VALUE : function() {
 		try {
 			if (v.CURRENCY != "GBP") {
 				if (v.CURRENCY == "EUR") {
-					v.AVERAGE_ROOM_RATE = fromEUR(v.AVERAGE_ROOM_RATE);
+					v.AVERAGE_ROOM_RATE = c.fromEUR(v.AVERAGE_ROOM_RATE);
 				}
 				if (v.CURRENCY == "USD") {
-					v.AVERAGE_ROOM_RATE = fromUSD(v.AVERAGE_ROOM_RATE);
+					v.AVERAGE_ROOM_RATE = c.fromUSD(v.AVERAGE_ROOM_RATE);
 				}
 			}
+			alert(v.AVERAGE_ROOM_RATE);
 			v.AVERAGE_TRANSACTION_VALUE = (v.AVERAGE_ROOM_RATE * v.AVERAGE_STAY) * v.EXTRAS;
+				return true;
+
 		} catch(e) {
 			console.log(e);
 			return false;
 		}
-		return true;
 	},
 	TURNOVER : function() {
 		try {
 			v.TURNOVER = v.NUMBER_OF_TRANSACTIONS_PER_DAY * v.AVERAGE_TRANSACTION_VALUE;
+				return true;
+
 		} catch(e) {
 			console.log(e);
 			return false;
@@ -96,38 +101,43 @@ var f = {
 	VALUE_SAVING_IN_MINUTES_OF_ONE_CURRENCY : function() {
 		try {
 			v.TOTAL_BENEFIT_PA = v.TURNOVER * v.VISA_AND_MASTERCARD_TRANSACTIONS * v.FOREIGN_CARD * v.DCC_ACCEPTANCE * v.COST_BENEFIT;
+			//alert(v.TOTAL_BENEFIT_PA);
 			if (v.CURRENCY != "GBP") {
 				if (v.CURRENCY == "EUR") {
-					v.TOTAL_BENEFIT_PA = fromEUR(v.TOTAL_BENEFIT_PA);
+					v.TOTAL_BENEFIT_PA = c.fromEUR(v.TOTAL_BENEFIT_PA);
 				}
 				if (v.CURRENCY == "USD") {
-					v.TOTAL_BENEFIT_PA = fromUSD(v.TOTAL_BENEFIT_PA);
+					v.TOTAL_BENEFIT_PA = c.fromUSD(v.TOTAL_BENEFIT_PA);
 				}
 			}
-			v.YEARLY_TIME_SAVING_YEARS = (v.NUMBER_OF_TRANSACTIONS * v.TIME_SAVING_MINUTES) / v.WORKING_MINUTES_IN_YEAR;
+//			alert(v.NUMBER_OF_TRANSACTIONS_PER_DAY+","+ v.TIME_SAVING_MINUTES+","+ v.WORKING_MINUTES_IN_YEAR);
+			v.YEARLY_TIME_SAVING_YEARS = (v.NUMBER_OF_TRANSACTIONS_PER_DAY * v.TIME_SAVING_MINUTES) / v.WORKING_MINUTES_IN_YEAR;
+	//		alert(v.YEARLY_TIME_SAVING_YEARS);
 			v.VALUE_SAVING_IN_CURRENCY = v.COST_OF_MANPOWER * v.YEARLY_TIME_SAVING_YEARS;
-			VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY = v.VALUE_SAVING_IN_CURRENCY / v.WEEKS_IN_YEAR / v.HOURS_IN_WEEK / v.MINUTES_IN_HOUR;
+		//	alert(v.VALUE_SAVING_IN_CURRENCY);
+			v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY = v.VALUE_SAVING_IN_CURRENCY / v.WEEKS_IN_YEAR / v.HOURS_IN_WEEK / v.MINUTES_IN_HOUR;
+			//alert(v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY);
+		return true;
 
 		} catch(e) {
 			console.log(e);
 			return false;
 		}
-		return true;
 	},
 	NUMBER_OF_UPSELLS : function() {
 		try {
 			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TOTAL_BENEFIT_PA / v.VALUE_SAVING_IN_CURRENCY;
 			//dividing yourself by something?wat?
-			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY;
-			v.NUMBER_OF_UPSELLS = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.ASSUMED_TIME_TAKEN_TO_UPSELL;
+			alert(v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES);
+			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY;
+			alert(v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES);
+			v.NUMBER_OF_UPSELLS = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.ASSUMED_TIME_FOR_UPSELL;
+			alert(v.ASSUMED_TIME_FOR_UPSELL);
+			return true;
 		} catch(e) {
-			console.log(e);
+			console.log(e.stack);
 			return false;
 		}
 		return true;
 	}
 }
-
-v.NUMBER_OF_ROOMS = document.getElementById("JS-number-of-rooms").value;
-v.CURRENCY = document.getElementById("JS-currency").value;
-v.AVERAGE_ROOM_RATE = document.getElementById("JS-average-room-rate").value;
