@@ -25,9 +25,14 @@
 				clear: left;
 				cursor: pointer;
 			}
+			.Warning{
+				background-color: pink;
+			}
+			.Success{
+				background-color: darkseagreen;
+			}
 			.Error {
 				display:none;
-				background-color: pink;
 				float: left;
 				clear: left;
 			}
@@ -39,14 +44,12 @@
 			<label>Company Name
 				<input type="text" id="JS-companyInput">
 			</label>
-			<div class = "Error" id="JS-companyInputError">
-				<strong>Something's Wrong!</strong> This doesn't look like a company name.
+			<div class = "Warning Error" id="JS-companyInputError">
 			</div>
 			<label>Number of Rooms * :
 				<input type="text" id="JS-number-of-rooms">
 			</label>
-			<div class = "Error" id="JS-number-of-roomsError">
-				<strong>Something's Wrong!</strong> This doesn't look like a number of rooms.
+			<div class = "Warning Error" id="JS-number-of-roomsError">
 			</div>
 			<label>Currency * :
 				<select id="JS-currency">
@@ -54,33 +57,28 @@
 					<option value="USD">USD</option>
 					<option value="EUR">EUR</option>
 				</select></label>
-			<div class = "Error" id="JS-currencyError">
-				<strong>Something's Wrong!</strong> This doesn't look like a currency we recognise.
+			<div class = "Warning Error" id="JS-currencyError">
 			</div>
 			<label>Average Room Rate (Per Night) * :
 				<input type="text" id="JS-average-room-rate">
 			</label>
-			<div class = "Error" id="JS-average-room-rateError">
-				<strong>Something's Wrong!</strong> This doesn't look like a room rate.
+			<div class = "Warning Error" id="JS-average-room-rateError">
 			</div>
 			<label>Contact Name :
 				<input type="text" id="JS-contactInput">
 			</label>
-			<div class = "Error" id="JS-contactInputError">
-				<strong>Something's Wrong!</strong> This doesn't look like a contact name.
+			<div class = "Warning Error" id="JS-contactInputError">
 			</div>
 			<label>Email Address :
 				<input type="text" id="JS-emailInput">
 			</label>
 	
-			<div class = "Error" id="JS-emailInputError">
-				<strong>Something's Wrong!</strong> This doesn't look like an email address.
+			<div class = "Warning Error" id="JS-emailInputError">
 			</div>
 			<label>Contact Phone Number :
 				<input type="text" id="JS-phoneInput">
 			</label>
-			<div class = "Error" id="JS-phoneInputError">
-				<strong>Something's Wrong!</strong> This doesn't look like a phone number.
+			<div class = "Warning Error" id="JS-phoneInputError">
 			</div>
 			<div class="button" id="submit">
 				Submit

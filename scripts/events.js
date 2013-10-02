@@ -1,4 +1,8 @@
 "use strict";
+window.onload = function(){
+	util.addSubmitListeners();
+}
+var addedListeners = false;
 document.getElementById("submit").onclick = function() {
 	if (util.errorChecking() == true) {
 		v.NUMBER_OF_ROOMS = document.getElementById("JS-number-of-rooms").value * 1;
@@ -38,6 +42,12 @@ document.getElementById("submit").onclick = function() {
 			document.getElementById("JS-upsellOutput").innerHTML = Math.floor(v.NUMBER_OF_UPSELLS);
 		} else {
 			console.log("f.NUMBER_OF_UPSELLS");
+		}
+	}
+	else{
+		if(addedListeners == false){
+			addedListeners = true;
+			util.addPermaListeners();
 		}
 	}
 }
