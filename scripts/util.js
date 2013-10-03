@@ -17,8 +17,14 @@ var util = {
 	addSubmitListeners : function(){
 //		for(var i = 0; i < util.formElements.length; i++){
 			document.getElementById(util.formElements[util.formElements.length-1]).onkeypress = function(e){
-				if(e.charCode==13){
-					document.getElementById("submit").click();
+				e = e || window.event;
+				if(e.keyCode==13){
+					var el = document.getElementById("submit");
+					if (el.onclick) {
+					   el.onclick();
+					} else if (el.click) {
+					   el.click();
+					}
 				}
 			}	
 	//	}
@@ -38,9 +44,9 @@ var util = {
 		var toTest = value;
 		if (util.type[index] == "Phone") {
 			var toText = 0;
-			if(toTest.match(/[0-9+\-\(\)\[\] ]{1,}/)!=null){
+			if(toTest.match(/[0-9+\-\(\)\[\],. ]{1,}/)!=null){
 				//console.log(
-					toText = toTest.match(/[0-9+\-\(\)\[\] ]{1,}/)[0].length;
+					toText = toTest.match(/[0-9+\-\(\)\[\],. ]{1,}/)[0].length;
 					console.log(toText+","+toTest.length);
 					//);
 			}
@@ -106,11 +112,10 @@ var util = {
 			}
 		} else if (util.type[index] == "Float") {
 			//regex a motherfucker for 0-9 and one .
-
-			if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false || toTest == "") {
+			if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false || toTest == "" || /[a-zA-Z]{1,}/.test(toTest) == true ) {
 				if (toTest == "") {
 					document.getElementById(util.formElements[index] + "Error").innerHTML = util.errorMessageEmpty[index];
-				} else if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false) {
+				} else if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false || /[a-zA-Z]{1,}/.test(toTest) == true) {
 					document.getElementById(util.formElements[index] + "Error").innerHTML = util.errorMessageWrongType[index];
 				}
 				document.getElementById(util.formElements[index] + "Error").className = "Error Warning";

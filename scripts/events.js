@@ -4,6 +4,10 @@ window.onload = function(){
 }
 var addedListeners = false;
 document.getElementById("submit").onclick = function() {
+	if(addedListeners == false){
+			addedListeners = true;
+			util.addPermaListeners();
+		}
 	if (util.errorChecking() == true) {
 		v.NUMBER_OF_ROOMS = document.getElementById("JS-number-of-rooms").value * 1;
 		v.CURRENCY = document.getElementById("JS-currency").value;
@@ -14,7 +18,7 @@ document.getElementById("submit").onclick = function() {
 			console.log("f.NUMBER_OF_TRANSACTIONS_PER_DAY failed.");
 		}
 		if (f.AVERAGE_TRANSACTION_VALUE() == true) {
-			document.getElementById("JS-ATVOutput").innerHTML = v.AVERAGE_TRANSACTION_VALUE;
+			document.getElementById("JS-ATVOutput").innerHTML = v.AVERAGE_TRANSACTION_VALUE + " "+v.CURRENCY;
 		} else {
 			console.log("f.AVERAGE_TRANSACTION_VALUE failed.");
 		}
@@ -33,7 +37,8 @@ document.getElementById("submit").onclick = function() {
 					break;
 				}
 			}
-			document.getElementById("JS-valueOutput").innerHTML = temp + " " + v.CURRENCY;
+			document.getElementById("JS-valueLabel").innerHTML = "Value in minutes of 1 "+v.CURRENCY+" : ";
+			document.getElementById("JS-valueOutput").innerHTML = temp + " minutes.";
 		}//
 		else {
 			console.log("f.AVERAGE_TRANSACTION_VALUE failed.");
@@ -42,12 +47,6 @@ document.getElementById("submit").onclick = function() {
 			document.getElementById("JS-upsellOutput").innerHTML = Math.floor(v.NUMBER_OF_UPSELLS);
 		} else {
 			console.log("f.NUMBER_OF_UPSELLS");
-		}
-	}
-	else{
-		if(addedListeners == false){
-			addedListeners = true;
-			util.addPermaListeners();
 		}
 	}
 }
