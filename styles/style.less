@@ -1,0 +1,195 @@
+@labelcolour : #222222;
+@textInputBackground : #FFFFFF;
+@textInputBorder : #D1D2CB;
+@textInputShadow : rgba(0, 0, 0, 0.15);
+@textInputActive : #F2F8FA;
+@textInputActiveBorder : #CCE2EB;
+@textInputMandatory : #FFFCF6;
+@submitTopSeperator : #EDEDEA;
+@submitButtonBackground : #FFFFFF;
+@submitButtonBorder : #4997B7;
+@submitButtonBorderBottom : #155983;
+@submitButtonFontColor : #FFFFFF;
+@submitButtonBackground : #4997b7;
+@submitButtonGradientTop : #5BA1BE;
+@submitButtonGradientBottom : #347EA2;
+@clearButtonFontColor : #4997b7;
+@submitButtonHoverBackground : #327EA2;
+@clearButtonTextColor : #4997B7;
+@clearButtonTextColorHover : #DE3919;
+@submitDivTop : #EDEDEA;
+@submitDivBackgroundColor : #F5F5F5;
+@failBackgroundColour: #F8EBED;
+@failTextColour : #BC3B4C;
+@failBorderColour : #F2D8DB;
+
+@successBackgroundColour: #F4F6EB;
+@successTextColour : #5C8056;
+@successBorderColour : #EAEEDB;
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+ 
+#calculator{
+padding-top:20px;
+border-top:1px #D1D2CB solid;
+float:left;
+width: 100%;
+  label {
+      font-family: Arial, sans-serif;
+      font-weight:bold;
+      font-size:13px;
+      line-height:18px;
+      color:@labelcolour;
+  	float: left;
+      clear:left;
+      margin-bottom:20px;
+  }
+  label .mandatory{
+    background: @textInputMandatory;
+    }
+
+  label input, label select{
+      width:330px;
+      padding-left:10px;
+      background: @textInputBackground;
+      border:1px solid @textInputBorder;
+      font-size:13px;
+      font-weight:normal;
+      line-height:18px;
+      float:left;
+      clear:left;
+      margin-top:10px;
+      height:25px;
+      border-radius:2px;
+        -webkit-box-shadow: inset 0 1px 2px @textInputShadow;
+        -moz-box-shadow: inset 0 1px 2px @textInputShadow;
+        box-shadow: inset 0 1px 2px @textInputShadow;
+         outline: none; 
+      }
+label select{
+    color: @labelcolour;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+	box-shadow: none;
+}   
+
+    input[type="text"]:focus{
+        background: @textInputActive;
+        border-color: @textInputActiveBorder;
+    }
+.submitSurround{
+  float: left;
+  clear: left;
+  width: 100%;
+  border-top:1px @submitDivTop solid;
+  background-color: #F5F5F5;
+  .clearButton{
+      font-family:Arial, sans-serif;
+      font-size:13px;
+      line-height:18px;
+      float:left;
+      margin: 20px 20px 20px 0px;
+      height:25px;
+  	  cursor: pointer;
+      height:25px;
+      padding-bottom:8px;
+          div{
+              color : @clearButtonTextColor;
+              margin-top:3px;
+              font-weight:normal;
+            }
+      }
+    .clearButton:hover, .clearButton:active{
+      div{
+          color: @clearButtonTextColorHover;
+           text-decoration:underline;
+      text-decoration-color: @clearButtonTextColorHover;
+          }
+      }
+     .submitButton:hover, .submitButton:active{
+        background : @submitButtonHoverBackground;     
+     }
+  .submitButton {
+  	float: left;
+    height:25px;
+    margin:20px;
+    background-color:blue;
+  	clear: left;
+  	cursor: pointer;
+    border:1px @submitButtonBorder solid;
+    border-bottom:1px @submitButtonBorderBottom solid;
+    border-radius:3px;
+    background: @submitButtonBackground;
+    background: -moz-linear-gradient(top, @submitButtonGradientTop 0%, @submitButtonGradientBottom 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@submitButtonGradientTop), color-stop(100%,@submitButtonGradientBottom)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* IE10+ */
+    background: linear-gradient(to bottom, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@submitButtonGradientTop', endColorstr='@submitButtonGradientBottom',GradientType=0 ); /* IE6-9 */
+      div{
+        margin:2px 11px 8px 11px;
+        font-size:13px;
+        font-weight:bold;
+        font-family:Arial, sans-serif;
+        line-height:18px;
+        color:@submitButtonFontColor;
+    }
+  }
+}
+  .Warning{
+      border:1px solid @failBorderColour;
+      background-color: @failBackgroundColour;
+    margin-bottom:20px;
+    .message{
+        color:@failTextColour
+        }
+  }
+  .Success{
+     
+    border:1px solid @successBorderColour;
+  	background-color: @successBackgroundColour;
+    margin-bottom:20px;
+    .message{
+        color:@successTextColour;
+        }
+  }
+  .results{
+  	float:left;
+  }
+  .resultsLabel{
+  	float:left;
+  	clear:left;
+  }
+  .Error {
+      border-radius:3px;
+    //  padding-top:18px;
+  	display:none;
+  	float: left;
+  	clear: left;
+      .message{
+          float:left;
+         
+          white-space: nowrap;
+          margin:14px 10px 0 0;
+          font-family:Arial, sans-serif;
+          font-weight:bold;
+          font-size:13px;
+          line-height:18px;
+          }
+    .succ{
+        background:url("../images/successGreen.png");
+        //<a href="http://thenounproject.com/noun/check-mark/#icon-No2783" target="_blank">Check Mark</a> designed by <a href="http://thenounproject.com/somerandomdude" target="_blank">P.J. Onori</a> from The Noun Project
+    }
+    .fail{       
+        background:url("../images/alertError.png");
+    }
+     .succ, .fail{
+         float:left;
+        margin:10px;
+         width:26px;
+         height:26px;
+     }
+  }
+}

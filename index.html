@@ -11,90 +11,59 @@
 		<meta name="author" content="AMRoche, of WeLikePie Productions" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 
-		<!--<link rel="stylesheet" href="css/style.css"/>-->
+		<link rel="stylesheet" href="styles/style.css"/>
 		<link rel="shortcut icon" href="/favicon.ico" />
-		<style>
-			label {
-				float: left;
-				clear: left;
-			}
-			.button {
-				float: left;
-				background-color: goldenrod;
-				padding: 20px;
-				clear: left;
-				cursor: pointer;
-			}
-			.Warning{
-				background-color: pink;
-			}
-			.Success{
-				background-color: darkseagreen;
-			}
-			.results{
-				float:left;
-			}
-			.resultsLabel{
-				float:left;
-				clear:left;
-			}
-			.Error {
-				display:none;
-				float: left;
-				clear: left;
-			}
-			#mandatory{
-				color:maroon;
-				float:left;
-				clear:left;
-			}
-		</style>
+
 	</head>
 	<body>
 		<div id="calculator">
-			<h4>Hotel Calculator</h4>
 			<label>Company Name
 				<input type="text" id="JS-companyInput">
 			</label>
 			<div class = "Warning Error" id="JS-companyInputError">
 			</div>
-			<label>Number of Rooms * :
-				<input type="text" id="JS-number-of-rooms">
+			<label>Number of Rooms
+				<input type="text" class="mandatory" id="JS-number-of-rooms">
 			</label>
 			<div class = "Warning Error" id="JS-number-of-roomsError">
 			</div>
-			<label>Currency * :
-				<select id="JS-currency">
-					<option value="GBP">GBP</option>
-					<option value="USD">USD</option>
-					<option value="EUR">EUR</option>
+			<label>Currency
+				<select class="mandatory" id="JS-currency">
+					<option value="">Select...</option>
+					<option value="GBP">£ British Pounds</option>
+					<option value="USD">$ United States Dollars</option>
+					<option value="EUR">€ Euros</option>
 				</select></label>
 			<div class = "Warning Error" id="JS-currencyError">
 			</div>
-			<label>Average Room Rate (Per Night) * :
-				<input type="text" id="JS-average-room-rate">
+			<label>Average Room Rate (Per Night)
+				<input type="text" class="mandatory" id="JS-average-room-rate">
 			</label>
 			<div class = "Warning Error" id="JS-average-room-rateError">
 			</div>
-			<label>Contact Name :
+			<label>Contact Name
 				<input type="text" id="JS-contactInput">
 			</label>
 			<div class = "Warning Error" id="JS-contactInputError">
 			</div>
-			<label>Email Address :
+			<label>Email Address
 				<input type="text" id="JS-emailInput">
 			</label>
 	
 			<div class = "Warning Error" id="JS-emailInputError">
 			</div>
-			<label>Contact Phone Number :
+			<label>Contact Phone Number
 				<input type="text" id="JS-phoneInput">
 			</label>
 			<div class = "Warning Error" id="JS-phoneInputError">
 			</div>
-			<div id="mandatory">Fields marked with a * are mandatory for calculations.</div>
-			<div class="button" id="submit">
-				Submit
+			<div class="submitSurround">
+				<div class="submitButton" id="submit">
+					<div>Submit</div>
+				</div>
+				<div class="clearButton" id="JS-clear">
+					<div>Clear form</div>
+				</div>
 			</div>
 			<div class="resultsLabel">Number of Transactions : </div><div class="results" id="JS-numTransactionOutput"></div>
 			<div class="resultsLabel">Average Transaction Value : </div><div class="results" id="JS-ATVOutput"></div>

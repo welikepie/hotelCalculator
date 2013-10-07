@@ -3,6 +3,12 @@ window.onload = function(){
 	util.addSubmitListeners();
 }
 var addedListeners = false;
+document.getElementById("JS-clear").onclick = function(){
+	for(var i = 0; i < util.formElements.length; i++){
+		document.getElementById(util.formElements[i]).value = "";
+		document.getElementById(util.formElements[i]+"Error").style.display = "none";
+	}
+}
 document.getElementById("submit").onclick = function() {
 	if(addedListeners == false){
 			addedListeners = true;
