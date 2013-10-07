@@ -7,6 +7,13 @@ document.getElementById("JS-clear").onclick = function(){
 	for(var i = 0; i < util.formElements.length; i++){
 		document.getElementById(util.formElements[i]).value = "";
 		document.getElementById(util.formElements[i]+"Error").style.display = "none";
+		document.getElementById("JS-numTransactionOutput").innerHTML = "";
+		document.getElementById("JS-ATVOutput").innerHTML = "";
+		document.getElementById("JS-TurnoverOutput").innerHTML = "";
+		document.getElementById("JS-valueOutput").innerHTML = "";
+		document.getElementById("JS-upsellOutput").innerHTML = "";
+		
+		
 	}
 }
 document.getElementById("submit").onclick = function() {

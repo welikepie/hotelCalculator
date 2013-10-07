@@ -22,10 +22,11 @@
 @failBackgroundColour: #F8EBED;
 @failTextColour : #BC3B4C;
 @failBorderColour : #F2D8DB;
-
 @successBackgroundColour: #F4F6EB;
 @successTextColour : #5C8056;
 @successBorderColour : #EAEEDB;
+@paragraphHeader: #222222;
+
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
  }
@@ -43,14 +44,15 @@ width: 100%;
       color:@labelcolour;
   	float: left;
       clear:left;
-      margin-bottom:20px;
   }
-  label .mandatory{
+  .mandatory{
     background: @textInputMandatory;
     }
 
-  label input, label select{
+  input//, select
+  {
       width:330px;
+      margin-bottom:20px;
       padding-left:10px;
       background: @textInputBackground;
       border:1px solid @textInputBorder;
@@ -62,16 +64,41 @@ width: 100%;
       margin-top:10px;
       height:25px;
       border-radius:2px;
-        -webkit-box-shadow: inset 0 1px 2px @textInputShadow;
-        -moz-box-shadow: inset 0 1px 2px @textInputShadow;
-        box-shadow: inset 0 1px 2px @textInputShadow;
-         outline: none; 
+    -webkit-box-shadow: inset 0 1px 2px @textInputShadow;
+    -moz-box-shadow: inset 0 1px 2px @textInputShadow;
+    box-shadow: inset 0 1px 2px @textInputShadow;
+     outline: none; 
       }
-label select{
+select{
+    font-family:Arial, sans-serif;
+    width:330px;
+      margin-top:10px;
+      margin-bottom:20px;
+      padding-left:10px;
+      background: @textInputBackground;
+      border:1px solid @textInputBorder;    
+    border-radius:2px;
+      outline: none;
+    float:left;
+    clear:left;
+    font-size:13px;
+    line-height:18px;
+    padding-top:3px;
+    padding-bottom:3px;
     color: @labelcolour;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-	box-shadow: none;
+	box-shadow: none;    
+//vertical-align:middle;
+    option{
+            font-family:Arial, sans-serif;
+        font-size:13px;
+        line-height:18px;
+        padding-left:10px;
+        color: @labelcolour;
+        //line-height:2px;
+        //height:25px;
+    }
 }   
 
     input[type="text"]:focus{
@@ -155,13 +182,35 @@ label select{
         color:@successTextColour;
         }
   }
-  .results{
-  	float:left;
-  }
-  .resultsLabel{
-  	float:left;
-  	clear:left;
-  }
+  
+  .queryResults{
+      margin-top:20px;
+      float:left;
+      clear:left;
+      .resultsHeader{
+          margin-bottom:10px;
+          font-family: Arial, sans-serif;
+          font-weight:bold;
+          font-size:13px;
+          line-height:18px;
+          color: @paragraphHeader;
+          }
+      .results, .resultsLabel{
+          font-weight:normal;
+          font-family:Arial, sans-serif;
+          font-size:13px;
+          line-height:18px;
+          color: @paragraphHeader;
+          }
+      .results{
+      	float:left;
+      }
+      .resultsLabel{
+      	float:left;
+      	clear:left;
+      }
+      
+}
   .Error {
       border-radius:3px;
     //  padding-top:18px;

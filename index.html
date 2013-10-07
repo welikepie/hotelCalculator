@@ -17,44 +17,44 @@
 	</head>
 	<body>
 		<div id="calculator">
-			<label>Company Name
-				<input type="text" id="JS-companyInput">
+			<label for="JS-companyInput">Company Name
 			</label>
+			<input type="text" id="JS-companyInput">
 			<div class = "Warning Error" id="JS-companyInputError">
 			</div>
-			<label>Number of Rooms
-				<input type="text" class="mandatory" id="JS-number-of-rooms">
+			<label for="JS-number-of-rooms">Number of Rooms
 			</label>
+			<input type="text" class="mandatory" id="JS-number-of-rooms">
 			<div class = "Warning Error" id="JS-number-of-roomsError">
 			</div>
-			<label>Currency
-				<select class="mandatory" id="JS-currency">
-					<option value="">Select...</option>
-					<option value="GBP">£ British Pounds</option>
-					<option value="USD">$ United States Dollars</option>
-					<option value="EUR">€ Euros</option>
-				</select></label>
+			<label for="JS-currency">Currency
+			</label>
+			<select class="mandatory" id="JS-currency">
+				<option value="">Select...</option>
+				<option value="GBP">£ British Pounds</option>
+				<option value="USD">$ United States Dollars</option>
+				<option value="EUR">€ Euros</option>
+			</select>
 			<div class = "Warning Error" id="JS-currencyError">
 			</div>
-			<label>Average Room Rate (Per Night)
-				<input type="text" class="mandatory" id="JS-average-room-rate">
+			<label for="JS-average-room-rate">Average Room Rate (Per Night)
 			</label>
+			<input type="text" class="mandatory" id="JS-average-room-rate">
 			<div class = "Warning Error" id="JS-average-room-rateError">
 			</div>
-			<label>Contact Name
-				<input type="text" id="JS-contactInput">
+			<label for="JS-contactInput">Contact Name
 			</label>
+			<input type="text" id="JS-contactInput">
 			<div class = "Warning Error" id="JS-contactInputError">
 			</div>
-			<label>Email Address
-				<input type="text" id="JS-emailInput">
+			<label for="JS-emailInput">Email Address
 			</label>
-	
+			<input type="text" id="JS-emailInput">	
 			<div class = "Warning Error" id="JS-emailInputError">
 			</div>
-			<label>Contact Phone Number
-				<input type="text" id="JS-phoneInput">
+			<label for="JS-phoneInput">Contact Phone Number
 			</label>
+			<input type="text" id="JS-phoneInput">
 			<div class = "Warning Error" id="JS-phoneInputError">
 			</div>
 			<div class="submitSurround">
@@ -65,11 +65,16 @@
 					<div>Clear form</div>
 				</div>
 			</div>
-			<div class="resultsLabel">Number of Transactions : </div><div class="results" id="JS-numTransactionOutput"></div>
-			<div class="resultsLabel">Average Transaction Value : </div><div class="results" id="JS-ATVOutput"></div>
-			<div class="resultsLabel">Estimated Turnover : </div><div class="results" id="JS-TurnoverOutput"></div>
-			<div class="resultsLabel" id="JS-valueLabel">Value in minutes of 1 GBP :  </div><div class="results" id="JS-valueOutput"></div>
-			<div class="resultsLabel">Number of Potential Upsells : </div><div class="results" id="JS-upsellOutput"></div>
+			<div class="queryResults">
+				<div class="resultsHeader">
+					Results
+				</div>
+				<div class="resultsLabel">Number of Transactions : </div><div class="results" id="JS-numTransactionOutput"></div>
+				<div class="resultsLabel">Average Transaction Value : </div><div class="results" id="JS-ATVOutput"></div>
+				<div class="resultsLabel">Estimated Turnover : </div><div class="results" id="JS-TurnoverOutput"></div>
+				<div class="resultsLabel" id="JS-valueLabel">Value in minutes of 1 GBP :  </div><div class="results" id="JS-valueOutput"></div>
+				<div class="resultsLabel">Number of Potential Upsells : </div><div class="results" id="JS-upsellOutput"></div>
+			</div>
 		</div>
 	</body>
 	<footer>
