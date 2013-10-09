@@ -1,5 +1,11 @@
 "use strict";
 var util = {
+selectContains : {
+	"" : "Select...",
+	"USD" : "$ United States Dollars",
+	"GBP" : "£ British Pounds",
+	"EUR" : "€ Euros"
+},
 formElements : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
 type : ["String", "Integer", "Currency","Float", "String", "Email", "Phone"],
 errorMessageEmpty : ["We'd love to know your company name.</div>",
@@ -58,6 +64,7 @@ inMandatory : function(input) {
 	} else {
 		//input.onchange = util.discreteTest(input.value,i);
 		input.onchange = function(e) {
+			document.getElementById("JS-selectResponseText").innerHTML = util.selectContains[document.getElementById("JS-currency").value];
 			util.discreteTest(input.value, i);
 		}
 	}

@@ -29,12 +29,18 @@
 			</div>
 			<label for="JS-currency">Currency
 			</label>
-			<select class="mandatory" id="JS-currency">
-				<option value="">Select...</option>
-				<option value="GBP">£ British Pounds</option>
-				<option value="USD">$ United States Dollars</option>
-				<option value="EUR">€ Euros</option>
-			</select>
+			<div class="mandatory" id="JS-selectCaps">
+				<div id="JS-selectResponse">
+					<div id="JS-selectResponseText">Select...</div>
+					<img src="images/dropdown.png" id="JS-responseImg"></img>
+				</div>
+				<select id="JS-currency">
+					<option value="">Select...</option>
+					<option value="GBP">£ British Pounds</option>
+					<option value="USD">$ United States Dollars</option>
+					<option value="EUR">€ Euros</option>
+				</select>
+			</div>
 			<div class = "Warning Error" id="JS-currencyError">
 			</div>
 			<label for="JS-average-room-rate">Average Room Rate (Per Night)

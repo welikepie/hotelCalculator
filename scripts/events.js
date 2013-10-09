@@ -1,6 +1,11 @@
 "use strict";
 window.onload = function(){
 	util.addSubmitListeners();
+document.getElementById("JS-currency").onchange = function(){
+	document.getElementById("JS-selectResponseText").innerHTML = util.selectContains[document.getElementById("JS-currency").value];
+}
+//	<div id="JS-selectResponse">Select...</div>
+//				<select id="JS-currency">
 }
 var addedListeners = false;
 document.getElementById("JS-clear").onclick = function(){
@@ -11,10 +16,9 @@ document.getElementById("JS-clear").onclick = function(){
 		document.getElementById("JS-ATVOutput").innerHTML = "";
 		document.getElementById("JS-TurnoverOutput").innerHTML = "";
 		document.getElementById("JS-valueOutput").innerHTML = "";
-		document.getElementById("JS-upsellOutput").innerHTML = "";
-		
-		
+		document.getElementById("JS-upsellOutput").innerHTML = "";	
 	}
+		document.getElementById("JS-selectResponseText").innerHTML = util.selectContains[document.getElementById("JS-currency").value];
 }
 document.getElementById("submit").onclick = function() {
 	if(addedListeners == false){

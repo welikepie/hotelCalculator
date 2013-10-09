@@ -69,37 +69,71 @@ width: 100%;
     box-shadow: inset 0 1px 2px @textInputShadow;
      outline: none; 
       }
-select{
-    font-family:Arial, sans-serif;
+#JS-selectCaps{
+    position:relative;
     width:330px;
-      margin-top:10px;
-      margin-bottom:20px;
-      padding-left:10px;
-      background: @textInputBackground;
-      border:1px solid @textInputBorder;    
     border-radius:2px;
-      outline: none;
     float:left;
     clear:left;
-    font-size:13px;
-    line-height:18px;
-    padding-top:3px;
-    padding-bottom:3px;
-    color: @labelcolour;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-	box-shadow: none;    
-//vertical-align:middle;
-    option{
+    margin-top:10px;
+    margin-bottom:20px;
+    padding:0px;
+    height:25px;
+    #JS-selectResponse{
+        border: 1px solid @textInputBorder;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border-radius:2px;
+        height:25px;
+        width:100%;
+        #JS-selectResponseText{
+            float:left;
             font-family:Arial, sans-serif;
+            padding-left:5px;
+            font-size:13px;
+            line-height:25px;
+        }
+        #JS-responseImg{
+            float:right;
+            margin-right: 3px;
+            margin-top: 3px;
+            width:15px;
+            height:17px;
+            }
+    }
+    select{
+        position: static;
+bottom: 0px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  /* IE 5-7 */
+  filter: alpha(opacity=0);
+  /* Good browsers */
+  opacity: 0;
+  height:25px;
+  width:100%;
+        font-family:Arial, sans-serif;
+          padding-left:10px;
+          background: @textInputBackground;
+          outline: none;
         font-size:13px;
         line-height:18px;
-        padding-left:10px;
         color: @labelcolour;
-        //line-height:2px;
-        //height:25px;
-    }
-}   
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+    	box-shadow: none;    
+    //vertical-align:middle;
+        option{
+                font-family:Arial, sans-serif;
+            font-size:13px;
+            line-height:18px;
+            padding-left:3px;
+            color: @labelcolour;
+            //line-height:2px;
+            //height:25px;
+        }
+    }   
+}
 
     input[type="text"]:focus{
         background: @textInputActive;
