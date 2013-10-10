@@ -49,7 +49,9 @@ document.getElementById("submit").onclick = function() {
 			
 			var temp = toFixed(v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY) + "";
 			for (var i = 0; i < temp.length; i++) {
-				if (temp[i] != "0" && temp[i] != ".") {
+				console.log(temp.charAt(i));
+				
+				if (temp.charAt(i) != "0" && temp.charAt(i) != ".") {
 					temp = temp.substring(0, i + 2);
 					break;
 				}
