@@ -13,8 +13,11 @@
 @submitButtonBackground : #4997b7;
 @submitButtonGradientTop : #5BA1BE;
 @submitButtonGradientBottom : #347EA2;
+@submitButtonGradientTopIE : '#FF5BA1BE';
+@submitButtonGradientBottomIE : '#FF347EA2';
 @clearButtonFontColor : #4997b7;
 @submitButtonHoverBackground : #327EA2;
+@submitButtonHoverBackgroundIE: '#FF327EA2';
 @clearButtonTextColor : #4997B7;
 @clearButtonTextColorHover : #DE3919;
 @submitDivTop : #EDEDEA;
@@ -28,7 +31,10 @@
 @paragraphHeader: #222222;
 
 *, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  //add *behaviour("styles/boxSizing.htc");  after this in css.
  }
  
 #calculator{
@@ -52,8 +58,12 @@ width: 100%;
   input//, select
   {
       width:330px;
+      height:25px;
+      *width:320px;
+      *padding-top:3px;
+      *height:22px;
       margin-bottom:20px;
-      padding-left:10px;
+      padding-left:5px;
       background: @textInputBackground;
       border:1px solid @textInputBorder;
       font-size:13px;
@@ -62,7 +72,6 @@ width: 100%;
       float:left;
       clear:left;
       margin-top:10px;
-      height:25px;
       border-radius:2px;
     -webkit-box-shadow: inset 0 1px 2px @textInputShadow;
     -moz-box-shadow: inset 0 1px 2px @textInputShadow;
@@ -80,6 +89,7 @@ width: 100%;
     padding:0px;
     height:25px;
     #JS-selectResponse{
+        z-index:10;
         border: 1px solid @textInputBorder;
         position: absolute;
         top: 0px;
@@ -103,19 +113,19 @@ width: 100%;
             }
     }
     select{
-        position: static;
-bottom: 0px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  /* IE 5-7 */
-  filter: alpha(opacity=0);
-  /* Good browsers */
-  opacity: 0;
-  height:25px;
-  width:100%;
-        font-family:Arial, sans-serif;
-          padding-left:10px;
-          background: @textInputBackground;
-          outline: none;
+        z-index:20;
+        position: absolute;
+        bottom: 0px;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0.01)";
+      /* IE 5-7 */
+      filter: alpha(opacity=1);
+      /* Good browsers */
+      opacity: 0;
+      height:100%;
+      width:100%;
+      font-family:Arial, sans-serif;
+      background: @textInputBackground;
+       outline: none;
         font-size:13px;
         line-height:18px;
         color: @labelcolour;
@@ -169,27 +179,32 @@ bottom: 0px;
           }
       }
      .submitButton:hover, .submitButton:active{
-        background : @submitButtonHoverBackground;     
+         border-radius:3px;
+        background : @submitButtonHoverBackground;   
+//        filter:none;
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorStr= @submitButtonHoverBackgroundIE, endColorStr= @submitButtonHoverBackgroundIE,GradientType=0 ); /* IE6-9 */
      }
   .submitButton {
   	float: left;
     height:25px;
     margin:20px;
-    background-color:blue;
   	clear: left;
   	cursor: pointer;
+  border-radius:3px;
+
     border:1px @submitButtonBorder solid;
     border-bottom:1px @submitButtonBorderBottom solid;
-    border-radius:3px;
+    border-radius:3.1px; //3.1px because IE10's rendering algorithm for gradients is a bit borked.
     background: @submitButtonBackground;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzViYTFiZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzNDdlYTIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background: -moz-linear-gradient(top, @submitButtonGradientTop 0%, @submitButtonGradientBottom 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@submitButtonGradientTop), color-stop(100%,@submitButtonGradientBottom)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* IE10+ */
     background: linear-gradient(to bottom, @submitButtonGradientTop 0%,@submitButtonGradientBottom 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@submitButtonGradientTop', endColorstr='@submitButtonGradientBottom',GradientType=0 ); /* IE6-9 */
-      div{
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorStr=@submitButtonGradientTopIE, endColorStr=@submitButtonGradientBottomIE,GradientType=0 ); /* IE6-9 */
+     div{
         margin:2px 11px 8px 11px;
         font-size:13px;
         font-weight:bold;
