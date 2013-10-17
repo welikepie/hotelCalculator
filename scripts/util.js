@@ -6,6 +6,7 @@ selectContains : {
 	"GBP" : "£ British Pounds",
 	"EUR" : "€ Euros"
 },
+toDatabase  : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
 formElements : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
 type : ["String", "Integer", "Currency","Float", "String", "Email", "Phone"],
 errorMessageEmpty : ["We'd love to know your company name.</div>",
@@ -56,7 +57,6 @@ inMandatory : function(input) {
 		util.permaListen(document.getElementById(util.formElements[i]), i);
 	}
 }, permaListen : function(input,i) {
-	console.log(input.tagName);
 	if (input.tagName.toLowerCase() != "select") {
 		input.onkeyup = function(e) {
 			util.discreteTest(input.value, i);
@@ -73,10 +73,7 @@ inMandatory : function(input) {
 	if (util.type[index] == "Phone") {
 		var toText = 0;
 		if (toTest.match(/[0-9+\-\(\)\[\],. ]{1,}/) != null) {
-			//console.log(
 			toText = toTest.match(/[0-9+\-\(\)\[\],. ]{1,}/)[0].length;
-			console.log(toText + "," + toTest.length);
-			//);
 		}
 		if (toText != toTest.length || toTest == "" || /[a-zA-Z]{1,}/.test(toTest) == true) {
 			if (toTest == "") {
@@ -99,7 +96,6 @@ inMandatory : function(input) {
 		}
 	}
 	if (util.type[index] == "Currency") {
-		console.log(toTest);
 		if (toTest == "" || toTest.length == 0) {
 			document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
 			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
@@ -208,7 +204,6 @@ inMandatory : function(input) {
 		return false;
 	} else {
 		for (var i = 0; i < util.formElements.length; i++) {
-			console.log(util.discreteTest(document.getElementById(util.formElements[i]).value, i));
 			if (util.discreteTest(document.getElementById(util.formElements[i]).value, i) == false) {
 				passed = false;
 			}

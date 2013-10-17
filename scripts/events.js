@@ -49,8 +49,6 @@ document.getElementById("submit").onclick = function() {
 			
 			var temp = toFixed(v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY) + "";
 			for (var i = 0; i < temp.length; i++) {
-				console.log(temp.charAt(i));
-				
 				if (temp.charAt(i) != "0" && temp.charAt(i) != ".") {
 					temp = temp.substring(0, i + 2);
 					break;
@@ -67,7 +65,25 @@ document.getElementById("submit").onclick = function() {
 		} else {
 			console.log("f.NUMBER_OF_UPSELLS");
 		}
+		//alert("submitted to le database");
+		pushToDatabase();
 	}
+}
+
+function pushToDatabase(){
+	var toOutput = {};
+	for(var i = 0; i < util.formElements.length; i++){
+		var foundVal = document.getElementById(util.formElements[i]).value;
+		if(foundVal!=""){
+			if(!isNaN(foundVal*1)){
+				toOutput[util.formElements[i].substring(3,util.formElements[i].length)] = foundVal*1;
+			}
+			else{
+				toOutput[util.formElements[i].substring(3,util.formElements[i].length)] = foundVal;
+			}
+		}
+	}
+	console.log(toOutput);
 }
 
 function toFixed(x) {
