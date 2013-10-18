@@ -6,7 +6,7 @@ selectContains : {
 	"GBP" : "£ British Pounds",
 	"EUR" : "€ Euros"
 },
-toDatabase  : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
+toDatabase  : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput","JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
 formElements : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
 type : ["String", "Integer", "Currency","Float", "String", "Email", "Phone"],
 errorMessageEmpty : ["We'd love to know your company name.</div>",
