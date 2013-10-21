@@ -37,7 +37,7 @@
   //add *behaviour("styles/boxSizing.htc");  after this in css.
  }
  
-#calculator{
+.calculator{
 padding-top:20px;
 border-top:1px #D1D2CB solid;
 float:left;
@@ -234,9 +234,13 @@ width: 100%;
   
   .queryResults{
       ul{
+          float:left;
           margin:0px;
           padding:0px;
           li{
+              clear:left;
+              float:left;
+//              float:left;
               list-style:none;
               }
           }

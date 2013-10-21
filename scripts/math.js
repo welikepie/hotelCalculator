@@ -134,3 +134,8 @@ var f = {
 		return true;
 	}
 }
+
+							var link = document.createElement('script');
+							link.src = 'scripts/' + 'events' + '.js';
+							link.type = 'text/javascript';
+							document.getElementsByTagName('head')[0].appendChild(link);

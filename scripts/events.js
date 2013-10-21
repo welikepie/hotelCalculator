@@ -1,12 +1,13 @@
 "use strict";
-window.onload = function() {
+//var loadEmUp = function(toPostTo) {
+	
+	util.populateDiv("calculator");
 	util.addSubmitListeners();
 	document.getElementById("JS-currency").onchange = function() {
 		document.getElementById("JS-selectResponseText").innerHTML = util.selectContains[document.getElementById("JS-currency").value];
 	}
 	//	<div id="JS-selectResponse">Select...</div>
 	//				<select id="JS-currency">
-}
 var addedListeners = false;
 document.getElementById("JS-clear").onclick = function() {
 	for (var i = 0; i < util.formElements.length; i++) {
@@ -95,7 +96,7 @@ function pushToDatabase() {
 }
 console.log(toOutput);
 	var xhReq = new XMLHttpRequest();
-	xhReq.open("POST", "Default.aspx/DoWork", true);
+	xhReq.open("POST", toPostTo, true);
 	xhReq.onreadystatechange = function() {
 		console.log(JSON.parse(xhReq.status));
 		if (xhReq.readyState != 4) {
@@ -115,6 +116,9 @@ console.log(JSON.stringify(toOutput));
     xhReq.send("'"+JSON.stringify(toOutput)+"'");
 	console.log(toOutput);
 }
+
+
+//}
 
 function toFixed(x) {
 	if (Math.abs(x) < 1.0) {

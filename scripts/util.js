@@ -6,6 +6,8 @@ selectContains : {
 	"GBP" : "£ British Pounds",
 	"EUR" : "€ Euros"
 },
+resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
+labels : ["Company Name", "Number of Rooms", "Currency", "Average Room Rate", "Contact Name","Email Address","Contact Phone Number", "Number of Transactions : ","Average Transaction Value : ","Estimated Turnover : ","Value in minutes of 1 GBP : ","Number of Potential Upsells : "],
 toDatabase  : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput","JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
 formElements : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
 type : ["String", "Integer", "Currency","Float", "String", "Email", "Phone"],
@@ -211,5 +213,120 @@ inMandatory : function(input) {
 		}
 		return passed;
 	}
+},
+populateDiv : function(domName){
+	var root = document.getElementsByClassName(domName);
+	for(var i = 0; i < root.length; i++){
+		util.addForm(root[i]);
+	}
+},
+addForm : function(domNode){
+	for(var i = 0; i < util.formElements.length; i++){
+		var label = document.createElement("label");
+		label.setAttribute("for",util.formElements[i]);
+		label.innerHTML = util.labels[i];
+		domNode.appendChild(label);
+		if(util.type[i] != "Currency"){
+			var input = document.createElement("input");
+			input.setAttribute("type","text");
+			input.setAttribute("id",util.formElements[i]);
+			domNode.appendChild(input);
+		}
+		else{
+			var container = document.createElement("div");
+			container.setAttribute("id","JS-selectCaps");
+			var input = document.createElement("select");
+			for(var key in util.selectContains){
+				if(util.selectContains.hasOwnProperty(key)){
+					var opt = document.createElement("option");
+					opt.setAttribute("value",key);
+					opt.innerHTML = util.selectContains[key];
+					input.appendChild(opt);
+				}
+			}
+			input.setAttribute("id",util.formElements[i]);
+			console.log(input);
+			var dummyDiv = document.createElement("div");
+			dummyDiv.setAttribute("id","JS-selectResponse");
+			var responseText = document.createElement("div");
+			responseText.setAttribute("id","JS-selectResponseText");
+			responseText.innerHTML = util.selectContains[""];
+			var dropImage = document.createElement("img");
+			dropImage.setAttribute("src","images/dropdown.png");
+			dropImage.setAttribute("id","JS-responseImg");
+			dummyDiv.appendChild(responseText);
+			dummyDiv.appendChild(dropImage);
+			container.appendChild(dummyDiv);
+			container.appendChild(input);
+			domNode.appendChild(container);
+		}
+		var warningDiv = document.createElement("div");
+		warningDiv.setAttribute("class","Warning Error");
+		warningDiv.setAttribute("id",util.formElements[i]+"Error");
+		domNode.appendChild(warningDiv);
+	}
+	for(var i = 0; i < util.mandatory.length; i++){
+		var toFind = util.mandatory[i];
+		if(util.mandatory[i] == "JS-currency"){
+			toFind = "JS-selectCaps";
+		}
+		console.log(toFind);
+		document.getElementById(toFind).setAttribute("class","mandatory");
+	}
+	util.addSubmit(domNode);
+	util.addResults(domNode);
+},
+addSubmit:function(domNode){
+	var submit = document.createElement("div");
+	submit.setAttribute("class","submitSurround");
+	var subProper = document.createElement("div");
+	subProper.setAttribute("id","submit");
+	subProper.setAttribute("class","submitButton");
+	var divCeption = document.createElement("div");
+	divCeption.innerHTML = "Submit";
+	var clear = document.createElement("div");
+	clear.setAttribute("id","JS-clear");
+	clear.setAttribute("class","clearButton");
+	var clearCeption = document.createElement("div");
+	clearCeption.innerHTML = "Clear form";
+
+	
+	subProper.appendChild(divCeption);
+	submit.appendChild(subProper);
+	clear.appendChild(clearCeption);
+	submit.appendChild(clear);
+	domNode.appendChild(submit);
+},
+addResults:function(domNode){
+	var divList = document.createElement("div");
+	divList.setAttribute("class","queryResults");
+	var queryHeader = document.createElement("div");
+	queryHeader.setAttribute("class","resultsHeader");
+	queryHeader.innerHTML = "Results";
+	var list = document.createElement("ul");
+	for(var i = util.formElements.length; i < util.labels.length; i++){
+		var listElement = document.createElement("li");
+		var resLabel = document.createElement("div");
+		if(util.resultsDivs[i-util.formElements.length] == "JS-valueOutput"){
+			resLabel.setAttribute("id","JS-valueLabel");
+		}
+		resLabel.setAttribute("class","resultsLabel");
+		resLabel.innerHTML = util.labels[i];
+		var res = document.createElement("div");
+		res.setAttribute("class","results");
+		res.setAttribute("id",util.resultsDivs[i-util.formElements.length]);
+		listElement.appendChild(resLabel);
+		listElement.appendChild(res);
+		list.appendChild(listElement);
+	}
+	divList.appendChild(queryHeader);
+	divList.appendChild(list);
+	domNode.appendChild(divList);
 }
-} 
+}
+
+							var link = document.createElement('script');
+							link.src = 'scripts/' + 'math' + '.js';
+							link.type = 'text/javascript';
+							document.getElementsByTagName('head')[0].appendChild(link);
+ 

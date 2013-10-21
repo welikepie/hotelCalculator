@@ -9,3 +9,8 @@ if (!(window.console && console.log)) {
     }
   }());
 }
+
+							var link = document.createElement('script');
+							link.src = 'scripts/' + 'util' + '.js';
+							link.type = 'text/javascript';
+							document.getElementsByTagName('head')[0].appendChild(link);
