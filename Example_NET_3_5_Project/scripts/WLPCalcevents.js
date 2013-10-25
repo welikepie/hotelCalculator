@@ -1,7 +1,7 @@
 "use strict";
 //var loadEmUp = function(toPostTo) {
 	
-	util.populateDiv("calculator");
+	util.populateDiv("WLPcalculator");
 	util.addSubmitListeners();
 	document.getElementById("JS-currency").onchange = function() {
 		document.getElementById("JS-selectResponseText").innerHTML = util.selectContains[document.getElementById("JS-currency").value];
@@ -84,8 +84,8 @@ function pushToDatabase() {
 	var toOutput = {};
 	for (var i = 0; i < util.toDatabase.length; i++) {
 		var foundVal = document.getElementById(util.toDatabase[i]).value;
-		    console.log(util.toDatabase[i]);
-			console.log(foundVal);
+		    //console.log(util.toDatabase[i]);
+			//console.log(foundVal);
 		if (foundVal != "") {
 			if (!isNaN(foundVal * 1) && util.toDatabase[i]!= "JS-phoneInput") {
 				toOutput[util.toDatabase[i].substring(3, util.toDatabase[i].length).replace(/-/g,"")] = foundVal * 1;
@@ -98,7 +98,7 @@ console.log(toOutput);
 	var xhReq = new XMLHttpRequest();
 	xhReq.open("POST", toPostTo, true);
 	xhReq.onreadystatechange = function() {
-		console.log(JSON.parse(xhReq.status));
+		//console.log(JSON.parse(xhReq.status));
 		if (xhReq.readyState != 4) {
 			console.log({
 				"error" : xhReq.readyState
@@ -108,7 +108,8 @@ console.log(toOutput);
 			};
 		}
 		var serverResponse = xhReq.responseText;
-		console.log(JSON.parse(serverResponse));
+		try{console.log(JSON.parse(serverResponse));}catch(e){
+		}
 	};
 xhReq.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 console.log(JSON.stringify(toOutput));
@@ -116,7 +117,7 @@ console.log(JSON.stringify(toOutput).replace(/"/g, '\\"'));
 var toWrite = { "input": JSON.stringify(toOutput) };
 console.log(JSON.stringify(toWrite));
 xhReq.send(JSON.stringify(toWrite));
-console.log(toOutput);
+	console.log(toOutput);
 }
 
 

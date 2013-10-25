@@ -1,5 +1,5 @@
 /* CSS crunched with Crunch - http://crunchapp.net/ */
-*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;*behaviour("styles/boxSizing.htc");}
 #WLPcalculator{padding-top:20px;border-top:1px #D1D2CB solid;float:left;width:100%;}#WLPcalculator label{font-family:Arial,sans-serif;font-weight:bold;font-size:13px;line-height:18px;color:#222222;float:left;clear:left;}
 #WLPcalculator .mandatory{background:#fffcf6;}
 #WLPcalculator input{width:330px;height:25px;*padding-top:3px;*height:22px;margin-bottom:20px;padding-left:5px;background:#ffffff;border:1px solid #d1d2cb;font-size:13px;font-weight:normal;line-height:18px;float:left;clear:left;margin-top:10px;border-radius:2px;-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.15);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.15);box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.15);outline:none;}
@@ -18,7 +18,7 @@
 #WLPcalculator .queryResults .results,#WLPcalculator .queryResults .resultsLabel{font-weight:normal;font-family:Arial,sans-serif;font-size:13px;line-height:18px;color:#222222;}
 #WLPcalculator .queryResults .results{float:left;}
 #WLPcalculator .queryResults .resultsLabel{float:left;clear:left;}
-#WLPcalculator .Error{border-radius:3px;display:none;float:left;clear:left;width:360px;overflow:hidden;}#WLPcalculator .Error .message{float:left;white-space:nowrap;margin:14px 10px 0 0;font-family:Arial,sans-serif;font-weight:bold;font-size:13px;line-height:18px;}
+#WLPcalculator .Error{border-radius:3px;display:none;float:left;clear:left;width:340px;overflow:hidden;}#WLPcalculator .Error .message{float:left;white-space:nowrap;margin:14px 10px 0 0;font-family:Arial,sans-serif;font-weight:bold;font-size:13px;line-height:18px;}
 #WLPcalculator .Error .succ{background:url("../images/WLPCalcsuccessGreen.png");}
 #WLPcalculator .Error .fail{background:url("../images/WLPCalcalertError.png");}
 #WLPcalculator .Error .succ,#WLPcalculator .Error .fail{float:left;margin:10px;margin-bottom:0px;width:26px;height:26px;}

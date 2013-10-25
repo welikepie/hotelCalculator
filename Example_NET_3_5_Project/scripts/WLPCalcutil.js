@@ -215,14 +215,27 @@ inMandatory : function(input) {
 	}
 },
 populateDiv : function(domName){
-	console.log(domName);
-	var root = document.getElementsByClassName(domName);
-	for(var i = 0; i < root.length; i++){
-		util.addForm(root[i]);
+	//console.log(domName);
+	var root = document.getElementById(domName);
+	//for(var i = 0; i < root.length; i++){
+		//util.addForm(root[i]);
+//	}
+	util.addForm(root);
+},
+isMandatory : function(isMand){
+	for(var i = 0; i < util.mandatory.length; i++){
+		var toFind = util.mandatory[i];
+		if(util.mandatory[i] == "JS-currency"){
+			toFind = "JS-selectCaps";
+		}
+		if(toFind == isMand){
+			return true;
+		}
 	}
+	return false;
 },
 addForm : function(domNode){
-	console.log(domNode);
+	//console.log(domNode);
 	for(var i = 0; i < util.formElements.length; i++){
 		var label = document.createElement("label");
 		label.setAttribute("for",util.formElements[i]);
@@ -230,12 +243,20 @@ addForm : function(domNode){
 		domNode.appendChild(label);
 		if(util.type[i] != "Currency"){
 			var input = document.createElement("input");
+			if(util.isMandatory(util.formElements[i])){
+				input.setAttribute("class","mandatory");
+				input.setAttribute("className","mandatory");
+			}
 			input.setAttribute("type","text");
 			input.setAttribute("id",util.formElements[i]);
 			domNode.appendChild(input);
 		}
 		else{
 			var container = document.createElement("div");
+			if(util.isMandatory("JS-selectCaps")){
+				container.setAttribute("class","mandatory");
+				container.setAttribute("className","mandatory");
+			}
 			container.setAttribute("id","JS-selectCaps");
 			var input = document.createElement("select");
 			for(var key in util.selectContains){
@@ -247,7 +268,7 @@ addForm : function(domNode){
 				}
 			}
 			input.setAttribute("id",util.formElements[i]);
-			console.log(input);
+			//console.log(input);
 			var dummyDiv = document.createElement("div");
 			dummyDiv.setAttribute("id","JS-selectResponse");
 			var responseText = document.createElement("div");
@@ -264,16 +285,9 @@ addForm : function(domNode){
 		}
 		var warningDiv = document.createElement("div");
 		warningDiv.setAttribute("class","Warning Error");
+		warningDiv.setAttribute("className","Warning Error");
 		warningDiv.setAttribute("id",util.formElements[i]+"Error");
 		domNode.appendChild(warningDiv);
-	}
-	for(var i = 0; i < util.mandatory.length; i++){
-		var toFind = util.mandatory[i];
-		if(util.mandatory[i] == "JS-currency"){
-			toFind = "JS-selectCaps";
-		}
-		console.log(toFind);
-		document.getElementById(toFind).setAttribute("class","mandatory");
 	}
 	util.addSubmit(domNode);
 	util.addResults(domNode);
@@ -281,14 +295,17 @@ addForm : function(domNode){
 addSubmit:function(domNode){
 	var submit = document.createElement("div");
 	submit.setAttribute("class","submitSurround");
+	submit.setAttribute("className","submitSurround");
 	var subProper = document.createElement("div");
 	subProper.setAttribute("id","submit");
 	subProper.setAttribute("class","submitButton");
+	subProper.setAttribute("className","submitButton");
 	var divCeption = document.createElement("div");
 	divCeption.innerHTML = "Submit";
 	var clear = document.createElement("div");
 	clear.setAttribute("id","JS-clear");
 	clear.setAttribute("class","clearButton");
+	clear.setAttribute("className","clearButton");
 	var clearCeption = document.createElement("div");
 	clearCeption.innerHTML = "Clear form";
 
@@ -302,8 +319,10 @@ addSubmit:function(domNode){
 addResults:function(domNode){
 	var divList = document.createElement("div");
 	divList.setAttribute("class","queryResults");
+	divList.setAttribute("className","queryResults");
 	var queryHeader = document.createElement("div");
 	queryHeader.setAttribute("class","resultsHeader");
+	queryHeader.setAttribute("className","resultsHeader");
 	queryHeader.innerHTML = "Results";
 	var list = document.createElement("ul");
 	for(var i = util.formElements.length; i < util.labels.length; i++){
@@ -313,9 +332,11 @@ addResults:function(domNode){
 			resLabel.setAttribute("id","JS-valueLabel");
 		}
 		resLabel.setAttribute("class","resultsLabel");
+			resLabel.setAttribute("className","resultsLabel");
 		resLabel.innerHTML = util.labels[i];
 		var res = document.createElement("div");
 		res.setAttribute("class","results");
+				res.setAttribute("className","results");
 		res.setAttribute("id",util.resultsDivs[i-util.formElements.length]);
 		listElement.appendChild(resLabel);
 		listElement.appendChild(res);
@@ -326,9 +347,13 @@ addResults:function(domNode){
 	domNode.appendChild(divList);
 }
 }
-
-							var link = document.createElement('script');
-							link.src = 'scripts/' + 'WLPCalcmath' + '.js';
-							link.type = 'text/javascript';
-							document.getElementsByTagName('head')[0].appendChild(link);
+	var link = document.createElement('script');
+	link.src = 'scripts/' + 'WLPCalcjson' + '.js';
+	link.type = 'text/javascript';
+	document.getElementsByTagName('head')[0].appendChild(link);
+ 
+	var link = document.createElement('script');
+	link.src = 'scripts/' + 'WLPCalcmath' + '.js';
+	link.type = 'text/javascript';
+	document.getElementsByTagName('head')[0].appendChild(link);
  

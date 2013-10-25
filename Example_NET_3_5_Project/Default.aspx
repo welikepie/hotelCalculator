@@ -36,25 +36,27 @@
 <![endif]-->
 	</head>
 	<body>
-    <div class="calculator"style="width:400px; height:740px; overflow:hidden;">
-		<script type="text/javascript">
-		    (function () {
-		        var postOffTo = "Default.aspx/DoWork";
-		        var link = document.createElement('link');
-		        link.href = 'styles/WLPCalccalculator.css';
-		        link.rel = 'stylesheet';
-		        document.getElementsByTagName('head')[0].appendChild(link);
-		        var scr = document.createElement("script");
-		        scr.type = "text/javascript";
-		        scr.innerHTML = "var toPostTo = " + '"' + postOffTo + '";';
-		        document.getElementsByTagName('head')[0].appendChild(scr);
-		        var link = document.createElement('script');
-		        link.src = 'scripts/' + 'WLPCalcnoConsole' + '.js';
-		        link.type = 'text/javascript';
-		        document.getElementsByTagName('head')[0].appendChild(link);
-		    })();
-			</script>
-		</div>
+       <div id="WLPcalculator"style="width:350px; height:px; overflow:hidden;">
+			    <script type="text/javascript">
+			        (function () {
+			            var postOffTo = "Default.aspx/DoWork";
+			            var scr = document.createElement("script");
+			            scr.setAttribute("type", "text/javascript");
+			            var inText = "var toPostTo = " + '"' + postOffTo + '";';
+			            scr.text = inText;
+			            document.getElementsByTagName('head')[0].appendChild(scr);
+			            var link = document.createElement('script');
+			            link.setAttribute("src", 'scripts/' + 'WLPCalcnoConsole' + '.js');
+			            link.setAttribute("type", 'text/javascript');
+			            document.getElementsByTagName('head')[0].appendChild(link);
+			            var link = document.createElement('link');
+			            link.href = 'styles/WLPCalccalculator.css';
+			            link.rel = 'stylesheet';
+			            document.getElementsByTagName('head')[0].appendChild(link);
+
+			        })();
+			    </script>
+		    </div>
 	</body>
 </html>
 </asp:Content>

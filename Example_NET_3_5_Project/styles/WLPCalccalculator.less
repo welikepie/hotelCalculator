@@ -37,7 +37,7 @@
   //add *behaviour("styles/boxSizing.htc");  after this in css.
  }
  
-.calculator{
+#WLPcalculator{
 padding-top:20px;
 border-top:1px #D1D2CB solid;
 float:left;
@@ -53,15 +53,16 @@ width: 100%;
   }
   .mandatory{
     background: @textInputMandatory;
+//    background-color: @textInputMandatory;
     }
 
   input//, select
   {
       width:330px;
       height:25px;
-   //   *width:322px;
-    //  *padding-top:3px;
-     // *height:22px;
+//      *width:320px;
+      *padding-top:3px;
+      *height:22px;
       margin-bottom:20px;
       padding-left:5px;
       background: @textInputBackground;
@@ -233,11 +234,14 @@ width: 100%;
   }
   
   .queryResults{
+      width:100%;
       ul{
+          width:100%;
           float:left;
           margin:0px;
           padding:0px;
           li{
+              width:100%;
               clear:left;
               float:left;
 //              float:left;
@@ -277,6 +281,8 @@ width: 100%;
   	display:none;
   	float: left;
   	clear: left;
+     width:360px;
+     overflow:hidden;
       .message{
           float:left;
          
