@@ -132,6 +132,32 @@ var f = {
 			return false;
 		}
 	},
+	DCC_BENEFIT_IN_MINUTES : function(){
+		try{
+			v.TOTAL_BENEFIT_PA = v.TURNOVER * v.VISA_AND_MASTERCARD_TRANSACTIONS * v.FOREIGN_CARD * v.DCC_ACCEPTANCE * v.COST_BENEFIT;
+			//alert(v.TOTAL_BENEFIT_PA);
+			var temp = v.COST_OF_MANPOWER;
+			if (v.CURRENCY != "GBP") {
+				if (v.CURRENCY == "EUR") {
+					temp = c.fromEUR(v.COST_OF_MANPOWER);
+				}
+				if (v.CURRENCY == "USD") {
+					temp = c.fromUSD(v.COST_OF_MANPOWER);
+				}
+				if (v.CURRENCY == "CHF"){
+					temp = c.fromCHF(v.COST_OF_MANPOWER);
+				}
+			}
+			v.YEARLY_TIME_SAVING_YEARS = (v.NUMBER_OF_TRANSACTIONS_PER_DAY * v.TIME_SAVING_MINUTES) / v.WORKING_MINUTES_IN_YEAR;
+			v.VALUE_SAVING_IN_CURRENCY = temp * v.YEARLY_TIME_SAVING_YEARS;
+			v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY = v.VALUE_SAVING_IN_CURRENCY / v.WEEKS_IN_YEAR / v.HOURS_IN_WEEK / v.MINUTES_IN_HOUR;
+			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TOTAL_BENEFIT_PA / v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY ;
+		return true;
+		}
+		catch(e){
+			console.log(e.stack);
+		}
+	},
 	VALUE_OF_EACH_MINUTE : function(){
 		try{
 		v.VALUE_OF_EACH_MIN = v.TURNOVER / v.MINUTES_ON_DESK_IN_DAY;
@@ -143,7 +169,6 @@ var f = {
 	},
 	NUMBER_OF_UPSELLS : function() {
 		try {
-			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TOTAL_BENEFIT_PA / v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY ;
 			v.NUMBER_OF_UPSELLS = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.ASSUMED_TIME_FOR_UPSELL;
 			//alert(v.ASSUMED_TIME_FOR_UPSELL);
 			return true;
@@ -152,6 +177,21 @@ var f = {
 			return false;
 		}
 		return true;
+	}
+}
+var u = {
+	parseTime : function(input){
+		var toUse = parseInt(input,10);
+		console.log(toUse);
+		var x = toUse / 1000;
+		var seconds = Math.floor(x % 60);
+		x /= 60;
+		var minutes = Math.floor(x % 60);
+		x /= 60;
+		var hours = Math.floor(x % 24);
+		x /= 24;
+		var days = Math.floor(x);
+		return {"days":days,"hours":hours,"minutes":minutes,"seconds":seconds};		
 	}
 }
 

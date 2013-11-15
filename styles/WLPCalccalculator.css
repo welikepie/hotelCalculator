@@ -5,113 +5,33 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-#WLPcalculator {
+#WLPcalculator #JS-show2,
+#WLPcalculator #JS-show3 {
+  display: none;
+  visibility: hidden;
+}
+#WLPcalculator .JS-show {
   padding-top: 20px;
   border-top: 1px #D1D2CB solid;
   float: left;
   width: 100%;
 }
-#WLPcalculator label {
-  font-family: Arial, sans-serif;
+#WLPcalculator .JS-show #loaderImage {
+  width: 128px;
+  height: 128px;
+  margin: 40px auto;
+  display: block;
+}
+#WLPcalculator .JS-show #loaderHead {
+  font-family: Arial;
   font-weight: bold;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 15 px;
+  line-height: 19px;
   color: #222222;
-  float: left;
-  clear: left;
+  margin: 20px 0 20px;
+  text-align: center;
 }
-#WLPcalculator .mandatory {
-  background: #fffcf6;
-}
-#WLPcalculator input {
-  width: 330px;
-  height: 25px;
-  *padding-top: 3px;
-  *height: 22px;
-  margin-bottom: 20px;
-  padding-left: 5px;
-  background: #ffffff;
-  border: 1px solid #d1d2cb;
-  font-size: 13px;
-  font-weight: normal;
-  line-height: 18px;
-  float: left;
-  clear: left;
-  margin-top: 10px;
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  outline: none;
-}
-#WLPcalculator #JS-selectCaps {
-  position: relative;
-  width: 330px;
-  border-radius: 2px;
-  float: left;
-  clear: left;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 0px;
-  height: 25px;
-}
-#WLPcalculator #JS-selectCaps #JS-selectResponse {
-  z-index: 10;
-  border: 1px solid #d1d2cb;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-radius: 2px;
-  height: 25px;
-  width: 100%;
-}
-#WLPcalculator #JS-selectCaps #JS-selectResponse #JS-selectResponseText {
-  float: left;
-  font-family: Arial, sans-serif;
-  padding-left: 5px;
-  font-size: 13px;
-  line-height: 25px;
-}
-#WLPcalculator #JS-selectCaps #JS-selectResponse #JS-responseImg {
-  float: right;
-  margin-right: 3px;
-  margin-top: 3px;
-  width: 15px;
-  height: 17px;
-}
-#WLPcalculator #JS-selectCaps select {
-  z-index: 20;
-  position: absolute;
-  bottom: 0px;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0.01)";
-  /* IE 5-7 */
-  filter: alpha(opacity=1);
-  /* Good browsers */
-  opacity: 0;
-  height: 100%;
-  width: 100%;
-  font-family: Arial, sans-serif;
-  background: #ffffff;
-  outline: none;
-  font-size: 13px;
-  line-height: 18px;
-  color: #222222;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-#WLPcalculator #JS-selectCaps select option {
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  padding-left: 3px;
-  color: #222222;
-}
-#WLPcalculator input[type="text"]:focus {
-  background: #f2f8fa;
-  border-color: #cce2eb;
-}
-#WLPcalculator .submitSurround {
+#WLPcalculator .JS-show .submitSurround {
   float: left;
   clear: left;
   width: 100%;
@@ -119,7 +39,7 @@
   background-color: #F5F5F5;
   padding: 20px;
 }
-#WLPcalculator .submitSurround .clearButton {
+#WLPcalculator .JS-show .submitSurround .clearButton {
   font-family: Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -128,25 +48,25 @@
   height: 25px;
   cursor: pointer;
 }
-#WLPcalculator .submitSurround .clearButton div {
+#WLPcalculator .JS-show .submitSurround .clearButton div {
   color: #4997b7;
   margin-top: 3px;
   font-weight: normal;
 }
-#WLPcalculator .submitSurround .clearButton:hover div,
-#WLPcalculator .submitSurround .clearButton:active div {
+#WLPcalculator .JS-show .submitSurround .clearButton:hover div,
+#WLPcalculator .JS-show .submitSurround .clearButton:active div {
   color: #de3919;
   text-decoration: underline;
   text-decoration-color: #de3919;
 }
-#WLPcalculator .submitSurround .submitButton:hover,
-#WLPcalculator .submitSurround .submitButton:active {
+#WLPcalculator .JS-show .submitSurround .submitButton:hover,
+#WLPcalculator .JS-show .submitSurround .submitButton:active {
   border-radius: 3px;
   background: #327ea2;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FF327EA2', endColorStr='#FF327EA2', GradientType=0);
   /* IE6-9 */
 }
-#WLPcalculator .submitSurround .submitButton {
+#WLPcalculator .JS-show .submitSurround .submitButton {
   float: left;
   height: 25px;
   margin-right: 20px;
@@ -175,50 +95,243 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FF5BA1BE', endColorStr='#FF347EA2', GradientType=0);
   /* IE6-9 */
 }
-#WLPcalculator .submitSurround .submitButton div {
+#WLPcalculator .JS-show .submitSurround .submitButton div {
   font-size: 13px;
   font-weight: bold;
   font-family: Arial, sans-serif;
   line-height: 18px;
   color: #ffffff;
 }
-#WLPcalculator .Warning {
+#WLPcalculator .JS-show .exText {
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  color: #222222;
+  float: left;
+  clear: left;
+}
+#WLPcalculator .JS-show .exText h1,
+#WLPcalculator .JS-show .exText h2,
+#WLPcalculator .JS-show .exText h3,
+#WLPcalculator .JS-show .exText h4,
+#WLPcalculator .JS-show .exText h5,
+#WLPcalculator .JS-show .exText h6,
+#WLPcalculator .JS-show .exText h7 {
+  font-weight: bold;
+  margin: 10px 0 10px;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+#WLPcalculator .JS-show label {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 18px;
+  color: #222222;
+  float: left;
+  clear: left;
+}
+#WLPcalculator .JS-show .mandatory {
+  background: #fffcf6;
+}
+#WLPcalculator .JS-show input {
+  width: 330px;
+  height: 25px;
+  *padding-top: 3px;
+  *height: 22px;
+  margin-bottom: 20px;
+  padding-left: 5px;
+  background: #ffffff;
+  border: 1px solid #d1d2cb;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  float: left;
+  clear: left;
+  margin-top: 10px;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+#WLPcalculator .JS-show #JS-selectCaps {
+  position: relative;
+  width: 330px;
+  border-radius: 2px;
+  float: left;
+  clear: left;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 0px;
+  height: 25px;
+}
+#WLPcalculator .JS-show #JS-selectCaps #JS-selectResponse {
+  z-index: 10;
+  border: 1px solid #d1d2cb;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 2px;
+  height: 25px;
+  width: 100%;
+}
+#WLPcalculator .JS-show #JS-selectCaps #JS-selectResponse #JS-selectResponseText {
+  float: left;
+  font-family: Arial, sans-serif;
+  padding-left: 5px;
+  font-size: 13px;
+  line-height: 25px;
+}
+#WLPcalculator .JS-show #JS-selectCaps #JS-selectResponse #JS-responseImg {
+  float: right;
+  margin-right: 3px;
+  margin-top: 3px;
+  width: 15px;
+  height: 17px;
+}
+#WLPcalculator .JS-show #JS-selectCaps select {
+  z-index: 20;
+  position: absolute;
+  bottom: 0px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0.01)";
+  /* IE 5-7 */
+  filter: alpha(opacity=1);
+  /* Good browsers */
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  outline: none;
+  font-size: 13px;
+  line-height: 18px;
+  color: #222222;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+#WLPcalculator .JS-show #JS-selectCaps select option {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  padding-left: 3px;
+  color: #222222;
+}
+#WLPcalculator .JS-show input[type="text"]:focus {
+  background: #f2f8fa;
+  border-color: #cce2eb;
+}
+#WLPcalculator .JS-show .submitSurround {
+  float: left;
+  clear: left;
+  width: 100%;
+  border-top: 1px #ededea solid;
+  background-color: #F5F5F5;
+  padding: 20px;
+}
+#WLPcalculator .JS-show .submitSurround .clearButton {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  float: left;
+  margin: 0px 20px 0px 0px;
+  height: 25px;
+  cursor: pointer;
+}
+#WLPcalculator .JS-show .submitSurround .clearButton div {
+  color: #4997b7;
+  margin-top: 3px;
+  font-weight: normal;
+}
+#WLPcalculator .JS-show .submitSurround .clearButton:hover div,
+#WLPcalculator .JS-show .submitSurround .clearButton:active div {
+  color: #de3919;
+  text-decoration: underline;
+  text-decoration-color: #de3919;
+}
+#WLPcalculator .JS-show .submitSurround .submitButton:hover,
+#WLPcalculator .JS-show .submitSurround .submitButton:active {
+  border-radius: 3px;
+  background: #327ea2;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FF327EA2', endColorStr='#FF327EA2', GradientType=0);
+  /* IE6-9 */
+}
+#WLPcalculator .JS-show .submitSurround .submitButton {
+  float: left;
+  height: 25px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  clear: left;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 2px 11px 0 11px;
+  border: 1px #4997b7 solid;
+  border-bottom: 1px #155983 solid;
+  border-radius: 3.1px;
+  background: #4997b7;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzViYTFiZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzNDdlYTIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top, #5ba1be 0%, #347ea2 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5ba1be), color-stop(100%, #347ea2));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5ba1be 0%, #347ea2 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #5ba1be 0%, #347ea2 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #5ba1be 0%, #347ea2 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #5ba1be 0%, #347ea2 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FF5BA1BE', endColorStr='#FF347EA2', GradientType=0);
+  /* IE6-9 */
+}
+#WLPcalculator .JS-show .submitSurround .submitButton div {
+  font-size: 13px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  line-height: 18px;
+  color: #ffffff;
+}
+#WLPcalculator .JS-show .Warning {
   border: 1px solid #f2d8db;
   background-color: #f8ebed;
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
-#WLPcalculator .Warning .message {
+#WLPcalculator .JS-show .Warning .message {
   color: #bc3b4c;
 }
-#WLPcalculator .Success {
+#WLPcalculator .JS-show .Success {
   border: 1px solid #eaeedb;
   background-color: #f4f6eb;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
-#WLPcalculator .Success .message {
+#WLPcalculator .JS-show .Success .message {
   color: #5c8056;
 }
-#WLPcalculator .queryResults {
+#WLPcalculator .JS-show .queryResults {
+  margin-bottom: 20px;
   width: 100%;
-  margin-top: 20px;
   float: left;
   clear: left;
 }
-#WLPcalculator .queryResults ul {
+#WLPcalculator .JS-show .queryResults ul {
   width: 100%;
   float: left;
   margin: 0px;
   padding: 0px;
 }
-#WLPcalculator .queryResults ul li {
+#WLPcalculator .JS-show .queryResults ul li {
   width: 100%;
   clear: left;
   float: left;
   list-style: none;
 }
-#WLPcalculator .queryResults .resultsHeader {
+#WLPcalculator .JS-show .queryResults .resultsHeader {
   margin-bottom: 10px;
   font-family: Arial, sans-serif;
   font-weight: bold;
@@ -226,23 +339,23 @@
   line-height: 18px;
   color: #222222;
 }
-#WLPcalculator .queryResults .results,
-#WLPcalculator .queryResults .resultsLabel {
+#WLPcalculator .JS-show .queryResults .results,
+#WLPcalculator .JS-show .queryResults .resultsLabel {
   font-weight: normal;
   font-family: Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
   color: #222222;
 }
-#WLPcalculator .queryResults .results {
+#WLPcalculator .JS-show .queryResults .results {
   clear: left;
   float: left;
 }
-#WLPcalculator .queryResults .resultsLabel {
+#WLPcalculator .JS-show .queryResults .resultsLabel {
   float: left;
   clear: left;
 }
-#WLPcalculator .Error {
+#WLPcalculator .JS-show .Error {
   border-radius: 3px;
   display: none;
   float: left;
@@ -250,7 +363,7 @@
   width: 340px;
   overflow: hidden;
 }
-#WLPcalculator .Error .message {
+#WLPcalculator .JS-show .Error .message {
   float: left;
   white-space: nowrap;
   margin: 14px 10px 0 0;
@@ -259,14 +372,14 @@
   font-size: 13px;
   line-height: 18px;
 }
-#WLPcalculator .Error .succ {
+#WLPcalculator .JS-show .Error .succ {
   background: url("../images/WLPCalcsuccessGreen.png");
 }
-#WLPcalculator .Error .fail {
+#WLPcalculator .JS-show .Error .fail {
   background: url("../images/WLPCalcalertError.png");
 }
-#WLPcalculator .Error .succ,
-#WLPcalculator .Error .fail {
+#WLPcalculator .JS-show .Error .succ,
+#WLPcalculator .JS-show .Error .fail {
   float: left;
   margin: 10px;
   margin-bottom: 0px;
