@@ -301,8 +301,8 @@ addForm : function(domNode){
 	}
 	util.addSubmit(JSSHOW1);
 	util.addResults(JSSHOW3);
-	util.addExplanatory(JSSHOW1);
-	util.addExplanatory(JSSHOW3);
+	util.addExplanatory(JSSHOW1,false,false);
+	util.addExplanatory(JSSHOW3,false,true);
 	util.addLoader(JSSHOW2);
 	domNode.appendChild(JSSHOW1);
 	domNode.appendChild(JSSHOW2);
@@ -362,16 +362,15 @@ addResults:function(domNode){
 	divList.appendChild(list);
 	domNode.appendChild(divList);
 },
-"addExplanatory" : function(domNode){
-
+"addExplanatory" : function(domNode,text,button){
+if(text == true){
 	var ExText = document.createElement("div");
 	ExText.innerHTML = util.exText;
 	ExText.className = "exText";
 	ExText.class="exText";
-	var surrounder = document.createElement("div");
-	surrounder.class="submitSurround";
-	surrounder.className="submitSurround";
-
+	domNode.appendChild(ExText);
+}
+if(button == true){
 	var clear = document.createElement("div");
 	clear.setAttribute("id","JS-clear");
 	clear.setAttribute("class","submitButton");
@@ -380,10 +379,12 @@ addResults:function(domNode){
 	var clearCeption = document.createElement("div");
 	clearCeption.innerHTML = "Start again";
 	clear.appendChild(clearCeption);
+	var surrounder = document.createElement("div");
+	surrounder.class="submitSurround";
+	surrounder.className="submitSurround";
 	surrounder.appendChild(clear);
-
-	domNode.appendChild(ExText);
 	domNode.appendChild(surrounder);
+}
 }
 }
 	var link = document.createElement('script');
