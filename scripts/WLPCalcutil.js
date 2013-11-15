@@ -4,10 +4,17 @@ selectContains : {
 	"" : "Select...",
 	"USD" : "$ United States Dollars",
 	"GBP" : "£ British Pounds",
-	"EUR" : "€ Euros"
-},
-resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
-labels : ["Company Name", "Number of Rooms", "Currency", "Average Room Rate", "Contact Name","Email Address","Contact Phone Number", "Number of Transactions : ","Average Transaction Value : ","Estimated Turnover : ","Value in minutes of 1 GBP : ","Number of Potential Upsells : "],
+	"EUR" : "€ Euros",
+	"CHF" : "SFr. Swiss Franc"
+},//test
+resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valMinuteOutput","JS-valueOutput","JS-upsellOutput"],
+labels : ["Company Name", "Number of Rooms", "Currency", "Average Room Rate", "Contact Name","Email Address","Contact Phone Number", 
+"Daily Number of Transactions (based on an average occupancy rate of 50%): ",
+"Average Transaction Value (based on an average stay of 1.5 days and additional purchases): ",
+"Estimated Daily Turnover: ",
+"Value of Each Minute (based on 8 hours of activity on the front desk): ",
+"Potential Time Savings in Minutes per Year (using DCC and advanced card payment technologies): ",
+"Number of Potential Upsells per Year (based on an average upsell time of 2 minutes): "],
 toDatabase  : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput","JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
 formElements : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
 type : ["String", "Integer", "Currency","Float", "String", "Email", "Phone"],
@@ -323,7 +330,7 @@ addResults:function(domNode){
 	var queryHeader = document.createElement("div");
 	queryHeader.setAttribute("class","resultsHeader");
 	queryHeader.setAttribute("className","resultsHeader");
-	queryHeader.innerHTML = "Results";
+	queryHeader.innerHTML = "Your Results";
 	var list = document.createElement("ul");
 	for(var i = util.formElements.length; i < util.labels.length; i++){
 		var listElement = document.createElement("li");
@@ -332,11 +339,11 @@ addResults:function(domNode){
 			resLabel.setAttribute("id","JS-valueLabel");
 		}
 		resLabel.setAttribute("class","resultsLabel");
-			resLabel.setAttribute("className","resultsLabel");
+		resLabel.setAttribute("className","resultsLabel");
 		resLabel.innerHTML = util.labels[i];
 		var res = document.createElement("div");
 		res.setAttribute("class","results");
-				res.setAttribute("className","results");
+		res.setAttribute("className","results");
 		res.setAttribute("id",util.resultsDivs[i-util.formElements.length]);
 		listElement.appendChild(resLabel);
 		listElement.appendChild(res);

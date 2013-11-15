@@ -30,30 +30,40 @@ var v = {
 
 	COST_OF_MANPOWER : 31200, //cost of manpower per person, per year. That looks about right for that number.
 	VALUE_SAVING_IN_CURRENCY : null,
-
+	//-----------------------------------------
+	MINUTES_ON_DESK_IN_DAY : 480,
+	VALUE_OF_EACH_MIN : null,
+	//-----------------------------------------
 	WEEKS_IN_YEAR : 48,
 	HOURS_IN_WEEK : 40,
 	MINUTES_IN_HOUR : 60, //change the constants of time itself. I dare you.
 	VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY : null,
-	//-------------------------------
+	//-----------------------------------------
 	TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES : null,
 	ASSUMED_TIME_FOR_UPSELL : 2,
 	NUMBER_OF_UPSELLS : null
 }
-var c = {//currency exchange rates from pounds. Accurate as of 30/9/13 at 10:30am from XE.com
-	toUSDfromPOUNDS : 0.619,
-	toEURfromPOUNDS : 0.834,
+var c = {//currency exchange rates from pounds. Accurate as of 15/11/13 at 10:30am from XE.com
+	toUSDfromPOUNDS : 0.622535,
+	toEURfromPOUNDS : 0.836894,
+	toCHFfromPOUNDS : 0.677658,
 	toUSD : function(input) {
 		return input / c.toUSDfromPOUNDS;
 	},
 	toEUR : function(input) {
 		return input / c.toEURfromPOUNDS;
 	},
+	toCHF : function(input){
+		return input/ c.toCHFfromPOUNDS;
+	},
 	fromUSD : function(input) {
 		return input * c.toUSDfromPOUNDS;
 	},
 	fromEUR : function(input) {
 		return input * c.toEURfromPOUNDS;
+	},
+	fromCHF : function(input){
+		return input * c.toCHFfromPOUNDS;
 	}
 }
 var f = {
@@ -103,12 +113,13 @@ var f = {
 			var temp = v.COST_OF_MANPOWER;
 			if (v.CURRENCY != "GBP") {
 				if (v.CURRENCY == "EUR") {
-					//v.TOTAL_BENEFIT_PA = c.fromEUR(v.TOTAL_BENEFIT_PA);
 					temp = c.fromEUR(v.COST_OF_MANPOWER);
 				}
 				if (v.CURRENCY == "USD") {
-					//v.TOTAL_BENEFIT_PA = c.fromUSD(v.TOTAL_BENEFIT_PA);
 					temp = c.fromUSD(v.COST_OF_MANPOWER);
+				}
+				if (v.CURRENCY == "CHF"){
+					temp = c.fromCHF(v.COST_OF_MANPOWER);
 				}
 			}
 			v.YEARLY_TIME_SAVING_YEARS = (v.NUMBER_OF_TRANSACTIONS_PER_DAY * v.TIME_SAVING_MINUTES) / v.WORKING_MINUTES_IN_YEAR;
@@ -120,6 +131,15 @@ var f = {
 			console.log(e);
 			return false;
 		}
+	},
+	VALUE_OF_EACH_MINUTE : function(){
+		try{
+		v.VALUE_OF_EACH_MIN = v.TURNOVER / v.MINUTES_ON_DESK_IN_DAY;
+		} catch(e){
+			console.log(e.stack);
+			return false;
+		}
+		return true;
 	},
 	NUMBER_OF_UPSELLS : function() {
 		try {
