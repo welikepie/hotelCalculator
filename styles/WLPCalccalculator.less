@@ -29,6 +29,7 @@
 @successTextColour : #5C8056;
 @successBorderColour : #EAEEDB;
 @paragraphHeader: #222222;
+@sixrock : #4E4E4E;
 
 *, *:before, *:after {
   -moz-box-sizing: border-box;
@@ -41,6 +42,9 @@
 #JS-show2, #JS-show3{
   display:none;
   visibility:hidden;
+}
+#JS-show1{
+  padding-top: 13px;
 }
 .JS-show{ 
 
@@ -124,13 +128,12 @@ text-align: center;
     }
   }
 }
-padding-top:20px;
-border-top:1px #D1D2CB solid;
+border-top:1px @textInputBorder solid;
 float:left;
 width: 100%;
 
 .exText{
-  margin-bottom:20px;
+  margin:0 0 20px;
       font-family: Arial, sans-serif;
       font-size:13px;
       line-height:18px;
@@ -338,7 +341,6 @@ width: 100%;
   }
   
   .queryResults{
-      margin-bottom:20px;
       width:100%;
       ul{
           width:100%;
@@ -346,6 +348,7 @@ width: 100%;
           margin:0px;
           padding:0px;
           li{
+            margin-bottom:10px;
               width:100%;
               clear:left;
               float:left;
@@ -356,28 +359,40 @@ width: 100%;
       float:left;
       clear:left;
       .resultsHeader{
-          margin-bottom:10px;
+          margin:13px 0 13px;
+        h3{
           font-family: Arial, sans-serif;
           font-weight:bold;
-          font-size:13px;
-          line-height:18px;
+          margin:0px;
+          font-size: 15px;
+          line-height:19px;
           color: @paragraphHeader;
           }
+         }
       .results, .resultsLabel{
+        float:left;
+        clear:left;
+        width:100%;
           font-weight:normal;
           font-family:Arial, sans-serif;
           font-size:13px;
           line-height:18px;
+          font-weight:bold;
           color: @paragraphHeader;
+            .subheading{
+              color:@sixrock;
+            }
           }
-      .results{
-        clear:left;
-      	float:left;
-      }
-      .resultsLabel{
-      	float:left;
-      	clear:left;
-      }
+          .results{
+            font-weight:normal;
+            color:@sixrock;
+            margin-top:10px;
+            padding:0 0 10px 0;
+            border-bottom: 1px @textInputBorder solid;
+          }
+          .resultsLabel{
+
+          }
       
 }
   .Error {
@@ -386,11 +401,9 @@ width: 100%;
   	display:none;
   	float: left;
   	clear: left;
-     width:340px;
+     width: 100%;
      overflow:hidden;
       .message{
-          float:left;
-         
           white-space: nowrap;
           margin:14px 10px 0 0;
           font-family:Arial, sans-serif;
