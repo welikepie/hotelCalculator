@@ -72,10 +72,11 @@ var f = {
 //			if(document.getElementById("JS-occupancy").value.indexOf("%")>0){
 //			v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10);
 //			}else if(parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10) > 1){
-				v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10)/100;
+			v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10)/100;
 //			}else{
 //				v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10);
 //			}
+			v.AVERAGE_STAY = parseFloat(document.getElementById("JS-averageDays").value.replace("%","").replace(/\s/g,""),10); 
 			v.NUMBER_OF_TRANSACTIONS_PER_DAY = (v.NUMBER_OF_ROOMS * v.OCCUPANCY) / v.AVERAGE_STAY;
 			return true;
 		} catch(e) {

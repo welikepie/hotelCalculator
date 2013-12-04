@@ -18,6 +18,7 @@ if(!Array.prototype.indexOf){
   }
 }
 
+
 							var link = document.createElement('script');
 							link.src = 'scripts/' + 'WLPCalcutil' + '.js';
 							link.type = 'text/javascript';

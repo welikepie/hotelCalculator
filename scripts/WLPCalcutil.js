@@ -15,7 +15,7 @@ labels : ["Number of Rooms", "Currency", "Average Room Rate","Occupancy Rate","A
 "Estimated Daily Turnover: ",
 "Value of Each Minute <span class=\"subheading\">(based on 8 hours of activity on the front desk)</span>: ",
 "Potential Time Savings per Year <span class=\"subheading\">(using DCC and advanced card payment technologies)</span>: ",
-"Number of Potential Upsells per Year <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: ",
+"Number of Potential Upsells per Year <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: "
 ],
 toDatabase  : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
 formElements : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate","JS-occupancy","JS-averageDays"],
@@ -37,6 +37,9 @@ onSuccessMessage : [
 "This looks much more like a room rate.",
 "This looks like an average occupancy.",
 "This looks much more like average days."],
+invalidValue : [
+"We'd love a value more than zero.","","We'd love a value more than zero.","We'd love a value between 1 and 100.","We'd love a value more than zero."
+],
 mandatory : ["JS-number-of-rooms", "JS-currency", "JS-average-room-rate", "JS-occupancy","JS-averageDays"],
 inMandatory : function(input) {
 	for (var i = 0; i < util.mandatory.length; i++) {
@@ -78,13 +81,18 @@ inMandatory : function(input) {
 }, discreteTest : function(value, index) {
 	var toTest = value;
 	if (util.type[index] == "Percent") {
-		if (toTest % 1 != 0 || toTest == "" || parseFloat(toTest,10) > 100 || parseFloat(toTest,10) < 0) {
+		if (toTest % 1 != 0 || toTest == "" || parseFloat(toTest,10) > 100 || parseFloat(toTest,10) ==0) {
 			if (toTest == "") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
-			} else if (toTest % 1 != 0 || parseFloat(toTest,10) > 100 || parseFloat(toTest,10) < 0) {
+			} else if (toTest % 1 != 0 ) {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
 			}
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			else if (parseFloat(toTest,10) > 100 || parseFloat(toTest,10) ==0){
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.invalidValue[index] + "</div>";
+			}
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Warning");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Warning");
+
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -92,7 +100,8 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
+				document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
@@ -104,7 +113,7 @@ inMandatory : function(input) {
 			if(toTest.indexOf("%")>0 && parseFloat(toTest.replace("%", "").replace(/\s/g,""),10) >= 0 && parseFloat(toTest.replace("%", "").replace(/\s/g,""),10) <= 100 ){
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
@@ -115,7 +124,7 @@ inMandatory : function(input) {
 				if(parseFloat(toTest,10) > 0 && parseFloat(toTest,10)<100){
 				if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
 				} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 				}
@@ -124,14 +133,14 @@ inMandatory : function(input) {
 			}
 			else{
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className" , "Error Warning");
 				document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 				return false;
 			}
 				}
 				catch(e){
 					document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
-					document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+					document.getElementById(util.formElements[index] + "Error").setAttribute("className" , "Error Warning");
 					document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 					return false;
 					console.log(e);
@@ -139,7 +148,7 @@ inMandatory : function(input) {
 			}
 		}else{
 			document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className", "Error Warning");
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			return false;
 		}
@@ -155,7 +164,7 @@ inMandatory : function(input) {
 			} else if (/[a-zA-Z]{0,}/.test(toTest) == true) {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
 			}
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className" , "Error Warning");
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -163,7 +172,7 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className" , "Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
@@ -172,7 +181,8 @@ inMandatory : function(input) {
 	if (util.type[index] == "Currency") {
 		if (toTest == "" || toTest.length == 0) {
 			document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Warning");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Warning");
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -180,7 +190,8 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className", "Error Success");
+				document.getElementById(util.formElements[index] + "Error").setAttribute("class", "Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
@@ -193,7 +204,9 @@ inMandatory : function(input) {
 			} else if ( typeof toTest != "string") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
 			}
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className", "Error Warning");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class", "Error Warning");
+
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -201,19 +214,24 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
 		}
 	} else if (util.type[index] == "Integer") {
-		if (toTest % 1 != 0 || toTest == "") {
+		if (toTest % 1 != 0 || toTest == "" || parseFloat(toTest,10) == 0) {
 			if (toTest == "") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
 			} else if (toTest % 1 != 0) {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
+			}else if (parseFloat(toTest,10) == 0){
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.invalidValue[index] + "</div>";
 			}
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Warning");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Warning");
+
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -221,20 +239,24 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
+				document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
 		}
 	} else if (util.type[index] == "Float") {
-		//regex a motherfucker for 0-9 and one .
-		if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false || toTest == "" || /[a-zA-Z]{1,}/.test(toTest) == true) {
+		//regex for 0-9 and one .
+		if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false || toTest == "" || /[a-zA-Z]{1,}/.test(toTest) == true || parseFloat(toTest,10)==0) {
 			if (toTest == "") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
 			} else if (/[0-9]{1,}[.]{0,1}[0-9]{0,}/.test(toTest) == false || /[a-zA-Z]{1,}/.test(toTest) == true) {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
+			} else if (parseFloat(toTest,10)==0){
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.invalidValue[index] + "</div>";
 			}
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Warning");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Warning");
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -242,7 +264,8 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
+				document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
@@ -255,7 +278,8 @@ inMandatory : function(input) {
 			} else if (/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}/.test(toTest) == false) {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
 			}
-			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Warning");
+			document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Warning");
 			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
 			if (util.inMandatory(util.formElements[index]) == true) {
 				return false;
@@ -263,7 +287,8 @@ inMandatory : function(input) {
 		} else {
 			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
 				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
-				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				document.getElementById(util.formElements[index] + "Error").setAttribute("className","Error Success");
+				document.getElementById(util.formElements[index] + "Error").setAttribute("class","Error Success");
 			} else {
 				document.getElementById(util.formElements[index] + "Error").style.display = "none";
 			}
@@ -307,19 +332,18 @@ isMandatory : function(isMand){
 	return false;
 },
 addForm : function(domNode){
-	//console.log(domNode);
 	var JSSHOW1 = document.createElement("div");
-	JSSHOW1.class="JS-show";
-	JSSHOW1.className="JS-show";
-	JSSHOW1.id = "JS-show1";
+	JSSHOW1.setAttribute("class","JS-show");
+	JSSHOW1.setAttribute("className","JS-show");
+	JSSHOW1.setAttribute("id","JS-show1");
 	var JSSHOW2 = document.createElement("div");
-	JSSHOW2.class="JS-show";
-	JSSHOW2.className="JS-show";
-	JSSHOW2.id = "JS-show2";
+	JSSHOW2.setAttribute("class","JS-show");
+	JSSHOW2.setAttribute("className","JS-show");
+	JSSHOW2.setAttribute("id","JS-show2");
 	var JSSHOW3 = document.createElement("div");
-	JSSHOW3.class="JS-show";
-	JSSHOW3.className="JS-show";
-	JSSHOW3.id = "JS-show3";
+	JSSHOW3.setAttribute("class","JS-show");
+	JSSHOW3.setAttribute("className","JS-show");
+	JSSHOW3.setAttribute("id","JS-show3");
 	for(var i = 0; i < util.formElements.length; i++){
 		var label = document.createElement("label");
 		label.setAttribute("for",util.formElements[i]);
@@ -454,8 +478,8 @@ addResults:function(domNode){
 if(text == true){
 	var ExText = document.createElement("div");
 	ExText.innerHTML = util.exText;
-	ExText.className = "exText";
-	ExText.class="exText";
+	ExText.setAttribute("className","exText");
+	ExText.setAttribute("class","exText");
 	domNode.appendChild(ExText);
 }
 if(button == true){
@@ -468,8 +492,8 @@ if(button == true){
 	clearCeption.innerHTML = "Start again";
 	clear.appendChild(clearCeption);
 	var surrounder = document.createElement("div");
-	surrounder.class="submitSurround";
-	surrounder.className="submitSurround";
+	surrounder.setAttribute("class","submitSurround");
+	surrounder.setAttribute("className","submitSurround");
 	surrounder.appendChild(clear);
 	domNode.appendChild(surrounder);
 }
