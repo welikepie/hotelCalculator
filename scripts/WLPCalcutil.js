@@ -9,28 +9,35 @@ selectContains : {
 },//test
 exText : "<h1>And the hat. She's a witch!</h1> How do you know she is a witch? I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave before I am forced to taunt you a second time! We shall say 'Ni' again to you, if you do not appease us. Bring her forward!",
 resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valMinuteOutput","JS-valueOutput","JS-upsellOutput"],
-labels : ["Number of Rooms", "Currency", "Average Room Rate",  
-"Daily Number of Transactions <span class=\"subheading\">(based on an average occupancy rate of 50%)</span>: ",
-"Average Transaction Value <span class=\"subheading\">(based on an average stay of 1.5 days and additional purchases)</span>: ",
+labels : ["Number of Rooms", "Currency", "Average Room Rate","Occupancy Rate","Average Number of Days Stayed",
+"Daily Number of Transactions: ",
+"Average Transaction Value <span class=\"subheading\">(with additional purchases included)</span>: ",
 "Estimated Daily Turnover: ",
 "Value of Each Minute <span class=\"subheading\">(based on 8 hours of activity on the front desk)</span>: ",
 "Potential Time Savings per Year <span class=\"subheading\">(using DCC and advanced card payment technologies)</span>: ",
-"Number of Potential Upsells per Year <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: "],
+"Number of Potential Upsells per Year <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: ",
+],
 toDatabase  : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
-formElements : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate"],
-type : ["Integer", "Currency","Float"],
+formElements : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate","JS-occupancy","JS-averageDays"],
+type : ["Integer", "Currency","Float", "Percent","Float"],
 errorMessageEmpty : ["We'd love to know how many rooms you have.",
 "We'd love to know which currency you're using!",
-"We'd love to know the average room rate."],
+"We'd love to know the average room rate.",
+"We'd love to know average room occupancy.",
+"We'd love to know how long people stay for."],
 errorMessageWrongType : [
 "We'd much rather have a number here.",
 "We'd much rather have a currency here.",
+"We'd much rather have a number here.",
+"We'd much rather have a percentage here.",
 "We'd much rather have a number here."],
 onSuccessMessage : [
 "This looks much more like a number of rooms.",
 "This looks just like a currency we can use.",
-"This looks much more like a room rate."],
-mandatory : ["JS-number-of-rooms", "JS-currency", "JS-average-room-rate"],
+"This looks much more like a room rate.",
+"This looks like an average occupancy.",
+"This looks much more like average days."],
+mandatory : ["JS-number-of-rooms", "JS-currency", "JS-average-room-rate", "JS-occupancy","JS-averageDays"],
 inMandatory : function(input) {
 	for (var i = 0; i < util.mandatory.length; i++) {
 		if (util.mandatory[i] == input) {
@@ -70,6 +77,73 @@ inMandatory : function(input) {
 	}
 }, discreteTest : function(value, index) {
 	var toTest = value;
+	if (util.type[index] == "Percent") {
+		if (toTest % 1 != 0 || toTest == "" || parseFloat(toTest,10) > 100 || parseFloat(toTest,10) < 0) {
+			if (toTest == "") {
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
+			} else if (toTest % 1 != 0 || parseFloat(toTest,10) > 100 || parseFloat(toTest,10) < 0) {
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageWrongType[index] + "</div>";
+			}
+			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
+			if (util.inMandatory(util.formElements[index]) == true) {
+				return false;
+			}
+		} else {
+			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
+				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+			} else {
+				document.getElementById(util.formElements[index] + "Error").style.display = "none";
+			}
+		}
+	}
+	/*if(util.type[index] == "Percent"){
+		console.log(parseFloat(toTest.replace("%", "").replace(/\s/g,""),10));
+		if(toTest.length > 0 && /[a-zA-Z]{1,}/.test(toTest) == false){
+			if(toTest.indexOf("%")>0 && parseFloat(toTest.replace("%", "").replace(/\s/g,""),10) >= 0 && parseFloat(toTest.replace("%", "").replace(/\s/g,""),10) <= 100 ){
+			if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
+				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+			} else {
+				document.getElementById(util.formElements[index] + "Error").style.display = "none";
+			}
+			}
+			else{
+				try{
+				parseFloat(toTest,10);
+				if(parseFloat(toTest,10) > 0 && parseFloat(toTest,10)<100){
+				if (document.getElementById(util.formElements[index] + "Error").style.display != "none") {
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='succ'></div><div class='message'>" + util.onSuccessMessage[index] + "</div>";
+				document.getElementById(util.formElements[index] + "Error").className = "Error Success";
+				} else {
+				document.getElementById(util.formElements[index] + "Error").style.display = "none";
+				}
+
+
+			}
+			else{
+				document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
+				document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+				document.getElementById(util.formElements[index] + "Error").style.display = "inline";
+				return false;
+			}
+				}
+				catch(e){
+					document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
+					document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+					document.getElementById(util.formElements[index] + "Error").style.display = "inline";
+					return false;
+					console.log(e);
+				}
+			}
+		}else{
+			document.getElementById(util.formElements[index] + "Error").innerHTML = "<div class='fail'></div><div class='message'>" + util.errorMessageEmpty[index] + "</div>";
+			document.getElementById(util.formElements[index] + "Error").className = "Error Warning";
+			document.getElementById(util.formElements[index] + "Error").style.display = "inline";
+			return false;
+		}
+	}*/
 	if (util.type[index] == "Phone") {
 		var toText = 0;
 		if (toTest.match(/[0-9+\-\(\)\[\],. ]{1,}/) != null) {
@@ -251,7 +325,21 @@ addForm : function(domNode){
 		label.setAttribute("for",util.formElements[i]);
 		label.innerHTML = util.labels[i];
 		JSSHOW1.appendChild(label);
-		if(util.type[i] != "Currency"){
+		if(util.type[i] == "Percent"){
+			var input = document.createElement("input");
+			if(util.isMandatory(util.formElements[i])){
+				input.setAttribute("class","mandatory");
+				input.setAttribute("className","mandatory");
+			}
+			input.setAttribute("type","text");
+			input.setAttribute("id",util.formElements[i]);
+			JSSHOW1.appendChild(input);
+			var percentSign = document.createElement("span");
+			percentSign.innerHTML = "%";
+			percentSign.setAttribute("id","percentSign");
+			JSSHOW1.appendChild(percentSign);
+		}
+		else if(util.type[i] != "Currency"){
 			var input = document.createElement("input");
 			if(util.isMandatory(util.formElements[i])){
 				input.setAttribute("class","mandatory");

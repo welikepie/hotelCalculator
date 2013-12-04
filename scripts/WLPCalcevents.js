@@ -45,8 +45,8 @@ document.getElementById("submit").onclick = function() {
 		v.CURRENCY = document.getElementById("JS-currency").value;
 		v.AVERAGE_ROOM_RATE = document.getElementById("JS-average-room-rate").value * 1;
 		if (f.NUMBER_OF_TRANSACTIONS_PER_DAY() == true) {
-			document.getElementById("JS-numTransactionOutput").innerHTML = v.NUMBER_OF_TRANSACTIONS_PER_DAY;
-			document.getElementById("JS-numTransactionOutput").value = v.NUMBER_OF_TRANSACTIONS_PER_DAY;
+			document.getElementById("JS-numTransactionOutput").innerHTML = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
+			document.getElementById("JS-numTransactionOutput").value = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
 		} else {
 			console.log("f.NUMBER_OF_TRANSACTIONS_PER_DAY failed.");
 		}

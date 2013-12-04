@@ -69,6 +69,13 @@ var c = {//currency exchange rates from pounds. Accurate as of 15/11/13 at 10:30
 var f = {
 	NUMBER_OF_TRANSACTIONS_PER_DAY : function() {
 		try {
+//			if(document.getElementById("JS-occupancy").value.indexOf("%")>0){
+//			v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10);
+//			}else if(parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10) > 1){
+				v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10)/100;
+//			}else{
+//				v.OCCUPANCY = parseFloat(document.getElementById("JS-occupancy").value.replace("%","").replace(/\s/g,""),10);
+//			}
 			v.NUMBER_OF_TRANSACTIONS_PER_DAY = (v.NUMBER_OF_ROOMS * v.OCCUPANCY) / v.AVERAGE_STAY;
 			return true;
 		} catch(e) {

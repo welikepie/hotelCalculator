@@ -6,11 +6,11 @@ selectContains : {
 	"GBP" : "£ British Pounds",
 	"EUR" : "€ Euros"
 },
-resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
-labels : ["Company Name", "Number of Rooms", "Currency", "Average Room Rate", "Contact Name","Email Address","Contact Phone Number", "Number of Transactions : ","Average Transaction Value : ","Estimated Turnover : ","Value in minutes of 1 GBP : ","Number of Potential Upsells : "],
+resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-Occupancy","JS-Average-Days","JS-valueOutput","JS-upsellOutput"],
+labels : ["Company Name", "Number of Rooms", "Currency", "Occupancy Rate","Average Number of Days Stayed","Average Room Rate", "Contact Name","Email Address","Contact Phone Number", "Number of Transactions : ","Average Transaction Value : ","Estimated Turnover : ","Value in minutes of 1 GBP : ","Number of Potential Upsells : "],
 toDatabase  : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput","JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
 formElements : ["JS-companyInput", "JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-contactInput", "JS-emailInput", "JS-phoneInput"],
-type : ["String", "Integer", "Currency","Float", "String", "Email", "Phone"],
+type : ["String", "Integer", "Currency","Float","Float","Float", "String", "Email", "Phone"],
 errorMessageEmpty : ["We'd love to know your company name.</div>",
 "We'd love to know how many rooms you have.",
 "We'd love to know which currency you're using!",
@@ -32,7 +32,7 @@ onSuccessMessage : ["This looks much more like a company name.",
 "This looks much more like a name we could contact.",
 "This looks much more like an email address.",
 "This looks much more like a phone number."],
-mandatory : ["JS-number-of-rooms", "JS-currency", "JS-average-room-rate"],
+mandatory : ["JS-number-of-rooms", "JS-currency", "JS-average-room-rate", "JS-Occupancy","JS-Average-Days"],
 inMandatory : function(input) {
 	for (var i = 0; i < util.mandatory.length; i++) {
 		if (util.mandatory[i] == input) {
