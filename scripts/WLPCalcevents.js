@@ -47,7 +47,7 @@ document.getElementById("submit").onclick = function() {
 		if (f.NUMBER_OF_TRANSACTIONS_PER_DAY() == true) {
 			var toInsert = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
 			if(toInsert > 1000){
-				toInsert = commaformat(toInsert);
+				toInsert = commaformat(toInsert.toString());
 			}
 			document.getElementById("JS-numTransactionOutput").innerHTML = toInsert;
 			document.getElementById("JS-numTransactionOutput").value = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
@@ -57,7 +57,7 @@ document.getElementById("submit").onclick = function() {
 		if (f.AVERAGE_TRANSACTION_VALUE() == true) {
 			var toInsert = v.AVERAGE_TRANSACTION_VALUE.toFixed(2);
 			if(v.AVERAGE_TRANSACTION_VALUE > 1000){
-				toInsert = commaformat(toInsert);
+				toInsert = commaformat(toInsert.toString());
 			}
 			document.getElementById("JS-ATVOutput").innerHTML = toInsert + " " + v.CURRENCY;
 			document.getElementById("JS-ATVOutput").value = v.AVERAGE_TRANSACTION_VALUE.toFixed(2);
@@ -67,7 +67,7 @@ document.getElementById("submit").onclick = function() {
 		if (f.TURNOVER() == true) {
 			var toInsert = v.TURNOVER.toFixed(2);
 			if(v.TURNOVER > 1000){
-				toInsert = commaformat(toInsert);
+				toInsert = commaformat(toInsert.toString());
 			}
 			document.getElementById("JS-TurnoverOutput").innerHTML = toInsert +" "+v.CURRENCY;
 			document.getElementById("JS-TurnoverOutput").value = v.TURNOVER.toFixed(2);
@@ -125,7 +125,7 @@ document.getElementById("submit").onclick = function() {
 		if(f.VALUE_OF_EACH_MINUTE() == true){
 			var toInsert = v.VALUE_OF_EACH_MIN.toFixed(2);
 			if(v.VALUE_OF_EACH_MIN>1000){
-				toInsert = commaformat(toInsert);
+				toInsert = commaformat(toInsert.toString());
 			}
 			document.getElementById("JS-valMinuteOutput").innerHTML = toInsert + " "+v.CURRENCY;
 			document.getElementById("JS-valMinuteOutput").value = v.VALUE_OF_EACH_MIN.toFixed(2);
@@ -140,7 +140,6 @@ document.getElementById("submit").onclick = function() {
 		//pushToDatabase();
 	document.getElementById("JS-show1").style.display="none";
 	document.getElementById("JS-show1").style.visibility="hidden";
-	console.log(document.getElementById("JS-show2"));
 	document.getElementById("JS-show2").style.display="inline";
 	document.getElementById("JS-show2").style.visibility="visible";
 	window.setTimeout(function(){

@@ -191,7 +191,6 @@ var f = {
 var u = {
 	parseTime : function(input){
 		var toUse = parseInt(input,10);
-		//console.log(toUse);
 		var x = toUse / 1000;
 		var seconds = Math.floor(x % 60);
 		x /= 60;
