@@ -159,7 +159,7 @@ var f = {
 			v.YEARLY_TIME_SAVING_YEARS = (v.NUMBER_OF_TRANSACTIONS_PER_DAY * v.TIME_SAVING_MINUTES) / v.WORKING_MINUTES_IN_YEAR;
 			v.VALUE_SAVING_IN_CURRENCY = temp * v.YEARLY_TIME_SAVING_YEARS;
 			v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY = v.VALUE_SAVING_IN_CURRENCY / v.WEEKS_IN_YEAR / v.HOURS_IN_WEEK / v.MINUTES_IN_HOUR;
-			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = v.TOTAL_BENEFIT_PA / v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY ;
+			v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES = (v.TOTAL_BENEFIT_PA/365)/v.VALUE_SAVING_PER_MINUTE_OF_1_CURRENCY ;
 		return true;
 		}
 		catch(e){
@@ -178,6 +178,7 @@ var f = {
 	NUMBER_OF_UPSELLS : function() {
 		try {
 			v.NUMBER_OF_UPSELLS = v.TIME_EQUIVALENT_OF_DCC_BENEFIT_IN_MINUTES / v.ASSUMED_TIME_FOR_UPSELL;
+			v.NUMBER_OF_UPSELLS = Math.ceil(v.NUMBER_OF_UPSELLS/365);
 			//alert(v.ASSUMED_TIME_FOR_UPSELL);
 			return true;
 		} catch(e) {
@@ -190,7 +191,7 @@ var f = {
 var u = {
 	parseTime : function(input){
 		var toUse = parseInt(input,10);
-		console.log(toUse);
+		//console.log(toUse);
 		var x = toUse / 1000;
 		var seconds = Math.floor(x % 60);
 		x /= 60;
@@ -199,7 +200,7 @@ var u = {
 		var hours = Math.floor(x % 24);
 		x /= 24;
 		var days = Math.floor(x);
-		return {"days":days,"hours":hours,"minutes":minutes,"seconds":seconds};		
+		return {"days":commaformat(days.toString()),"hours":hours,"minutes":minutes,"seconds":seconds};		
 	}
 }
 

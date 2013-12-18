@@ -2,20 +2,20 @@
 var util = {
 selectContains : {
 	"" : "Select...",
-	"USD" : "$ United States Dollars",
-	"GBP" : "£ British Pounds",
-	"EUR" : "€ Euros",
-	"CHF" : "SFr. Swiss Franc"
+	"USD" : "USD United States Dollars",
+	"GBP" : "GBP British Pounds",
+	"EUR" : "EUR Euros",
+	"CHF" : "CHF Swiss Franc"
 },//test
 exText : "<h1>And the hat. She's a witch!</h1> How do you know she is a witch? I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave before I am forced to taunt you a second time! We shall say 'Ni' again to you, if you do not appease us. Bring her forward!",
-resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valMinuteOutput","JS-valueOutput","JS-upsellOutput"],
+resultsDivs : ["JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valMinuteOutput","JS-valueOutput"/*,"JS-upsellOutput"*/],
 labels : ["Number of Rooms", "Currency", "Average Room Rate","Occupancy Rate","Average Number of Days Stayed",
 "Daily Number of Transactions: ",
 "Average Transaction Value <span class=\"subheading\">(with additional purchases included)</span>: ",
 "Estimated Daily Turnover: ",
 "Value of Each Minute <span class=\"subheading\">(based on 8 hours of activity on the front desk)</span>: ",
-"Potential Time Savings per Year <span class=\"subheading\">(using DCC and advanced card payment technologies)</span>: ",
-"Number of Potential Upsells per Year <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: "
+"Potential Time Savings per Day <span class=\"subheading\">(using DCC and advanced card payment technologies)</span>: "//,
+//"Number of Potential Upsells per Day <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: "
 ],
 toDatabase  : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
 formElements : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate","JS-occupancy","JS-averageDays"],

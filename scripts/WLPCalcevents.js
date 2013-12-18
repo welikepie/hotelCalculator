@@ -24,15 +24,15 @@ function JSClear() {
 		document.getElementById("JS-ATVOutput").innerHTML = "";
 		document.getElementById("JS-TurnoverOutput").innerHTML = "";
 		document.getElementById("JS-valueOutput").innerHTML = "";
-		document.getElementById("JS-upsellOutput").innerHTML = "";
+		//document.getElementById("JS-upsellOutput").innerHTML = "";
 		document.getElementById("JS-valMinuteOutput").innerHTML = "";
 		document.getElementById("JS-valMinuteOutput").value = "";
 		document.getElementById("JS-numTransactionOutput").value = "";
 		document.getElementById("JS-ATVOutput").value = "";
 		document.getElementById("JS-TurnoverOutput").value = "";
 		document.getElementById("JS-valueOutput").value = "";
-		document.getElementById("JS-upsellOutput").value = "";
-
+		//document.getElementById("JS-upsellOutput").value = "";
+		document.getElementById("JS-currency").value = "";
 	document.getElementById("JS-selectResponseText").innerHTML = util.selectContains[document.getElementById("JS-currency").value];
 }
 document.getElementById("submit").onclick = function() {
@@ -45,19 +45,31 @@ document.getElementById("submit").onclick = function() {
 		v.CURRENCY = document.getElementById("JS-currency").value;
 		v.AVERAGE_ROOM_RATE = document.getElementById("JS-average-room-rate").value * 1;
 		if (f.NUMBER_OF_TRANSACTIONS_PER_DAY() == true) {
-			document.getElementById("JS-numTransactionOutput").innerHTML = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
+			var toInsert = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
+			if(toInsert > 1000){
+				toInsert = commaformat(toInsert);
+			}
+			document.getElementById("JS-numTransactionOutput").innerHTML = toInsert;
 			document.getElementById("JS-numTransactionOutput").value = Math.ceil(v.NUMBER_OF_TRANSACTIONS_PER_DAY.toFixed(2));
 		} else {
 			console.log("f.NUMBER_OF_TRANSACTIONS_PER_DAY failed.");
 		}
 		if (f.AVERAGE_TRANSACTION_VALUE() == true) {
-			document.getElementById("JS-ATVOutput").innerHTML = v.AVERAGE_TRANSACTION_VALUE.toFixed(2) + " " + v.CURRENCY;
+			var toInsert = v.AVERAGE_TRANSACTION_VALUE.toFixed(2);
+			if(v.AVERAGE_TRANSACTION_VALUE > 1000){
+				toInsert = commaformat(toInsert);
+			}
+			document.getElementById("JS-ATVOutput").innerHTML = toInsert + " " + v.CURRENCY;
 			document.getElementById("JS-ATVOutput").value = v.AVERAGE_TRANSACTION_VALUE.toFixed(2);
 		} else {
 			console.log("f.AVERAGE_TRANSACTION_VALUE failed.");
 		}
 		if (f.TURNOVER() == true) {
-			document.getElementById("JS-TurnoverOutput").innerHTML = v.TURNOVER.toFixed(2) +" "+v.CURRENCY;
+			var toInsert = v.TURNOVER.toFixed(2);
+			if(v.TURNOVER > 1000){
+				toInsert = commaformat(toInsert);
+			}
+			document.getElementById("JS-TurnoverOutput").innerHTML = toInsert +" "+v.CURRENCY;
 			document.getElementById("JS-TurnoverOutput").value = v.TURNOVER.toFixed(2);
 		}//VALUE_SAVING_IN_MINUTES_OF_ONE_CURRENCY
 		else {
@@ -91,7 +103,7 @@ document.getElementById("submit").onclick = function() {
 					firstKey = "seconds";
 				}
 				if(firstKey != ""){
-					console.log(temp.key);
+					//console.log(temp.key);
 					if(order.indexOf(key)-1 <= order.indexOf(firstKey)){
 						if(toWrite.length > 0){
 							toWrite+=", ";
@@ -111,15 +123,19 @@ document.getElementById("submit").onclick = function() {
 			console.log("f.AVERAGE_TRANSACTION_VALUE failed.");
 		}
 		if(f.VALUE_OF_EACH_MINUTE() == true){
-			document.getElementById("JS-valMinuteOutput").innerHTML = v.VALUE_OF_EACH_MIN.toFixed(2) + " "+v.CURRENCY;
+			var toInsert = v.VALUE_OF_EACH_MIN.toFixed(2);
+			if(v.VALUE_OF_EACH_MIN>1000){
+				toInsert = commaformat(toInsert);
+			}
+			document.getElementById("JS-valMinuteOutput").innerHTML = toInsert + " "+v.CURRENCY;
 			document.getElementById("JS-valMinuteOutput").value = v.VALUE_OF_EACH_MIN.toFixed(2);
 		}
-		if (f.NUMBER_OF_UPSELLS() == true) {
+		/*if (f.NUMBER_OF_UPSELLS() == true) {
 			document.getElementById("JS-upsellOutput").innerHTML = Math.ceil(v.NUMBER_OF_UPSELLS);
 			document.getElementById("JS-upsellOutput").value = Math.ceil(v.NUMBER_OF_UPSELLS);
 		} else {
 			console.log("f.NUMBER_OF_UPSELLS");
-		}
+		}*/
 		//alert("submitted to le database");
 		//pushToDatabase();
 	document.getElementById("JS-show1").style.display="none";
@@ -199,3 +215,17 @@ function toFixed(x) {
 	return x;
 }
 
+function commaformat(input){
+	var split = input.split(".");
+	if(split.length == 1){
+		return split[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+	}else if(split.length == 2){
+		if(split[1]!="00"){
+			return split[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+"."+split[1];
+		}
+		else{
+			return split[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+		}
+	}
+//	.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+}
