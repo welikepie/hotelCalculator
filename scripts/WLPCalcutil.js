@@ -14,7 +14,7 @@ labels : ["Number of Rooms", "Currency", "Average Room Rate","Occupancy Rate","A
 "Average Transaction Value <span class=\"subheading\">(with additional purchases included)</span>: ",
 "Estimated Daily Turnover: ",
 "Value of Each Minute <span class=\"subheading\">(based on 8 hours of activity on the front desk)</span>: ",
-"Potential Time Savings per Day <span class=\"subheading\">(using DCC and advanced card payment technologies)</span>: "//,
+"Using DCC and advanced card payment technologies, you could save this amount of time every day: "//,
 //"Number of Potential Upsells per Day <span class=\"subheading\">(based on an average upsell time of 2 minutes)</span>: "
 ],
 toDatabase  : ["JS-number-of-rooms", "JS-currency","JS-average-room-rate", "JS-numTransactionOutput","JS-ATVOutput","JS-TurnoverOutput","JS-valueOutput","JS-upsellOutput"],
